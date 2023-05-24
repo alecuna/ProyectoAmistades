@@ -4,6 +4,8 @@
  */
 package proyecto.pkg1;
 
+import proyecto.pkg1.GUIs.Ventana1;
+
 /**
  *
  * @author Anabella Jaua
@@ -15,6 +17,9 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Ventana1 window = new Ventana1();
+        window.setVisible(true);
+        
     }
     
 }
