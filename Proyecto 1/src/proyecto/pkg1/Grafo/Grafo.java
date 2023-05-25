@@ -11,11 +11,11 @@ import javax.swing.JOptionPane;
  * @author alexandralecuna
  */
 public class Grafo {
-    
+
     private Lista<Integer>[] adj;
     private int V; // numero de vertices
     private int E; // numero de aristas
-    
+
     public Grafo(int vertices) {
         this.V = vertices;
         this.E = 0;
@@ -24,36 +24,26 @@ public class Grafo {
             adj[i] = new Lista<>();
         }
     }
-    
+
     public void addArista(int a, int b) {
         adj[a].insertLast(b);
         adj[b].insertLast(a);
         E++;
     }
-    
+
     public void printVerts() {
-        
+
         String sVerts = "";
         sVerts += V + " vertices, " + E + " edges " + "\n";
         for (int v = 0; v < V; v++) {
+            Nodo pointer = adj[v].getHead();
             sVerts += (v + ": ");
-            for (int i = 0; i < V; i++) {
-                sVerts += adj[v].getDato(i);
+            for (int i = 0; i < adj[v].getSize(); i++) {
+                sVerts += adj[v].getDato(i) + " ";
             }
+            sVerts += " \n";
         }
-        System.out.println(sVerts); 
+        System.out.println(sVerts);
     }
-    
-//    public void print2(){
-//        
-//        String sVerts = "";
-//        sVerts += V + " vertices, " + E + " edges " + "\n";
-//        for (int v = 0; v < V; v++) {
-//            sVerts += (v + ": ");
-//            for (int w : adj[v]){
-//                sVerts += w + " ";
-//            }
-//        }
-//    }
-    
+
 }
