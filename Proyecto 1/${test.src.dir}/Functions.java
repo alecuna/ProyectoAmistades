@@ -38,4 +38,26 @@ public class Functions {
         }
         return grafo_txt;
     }
+    
+    public void Lectura(String nombreArchivo){
+        File archivo;
+        FileReader fr; 
+        BufferedReader br; 
+        
+        try{
+            archivo = new File(nombreArchivo);
+            fr = new FileReader(archivo);
+            br = new BufferedReader(fr);
+            
+            String linea; 
+            while ((linea=br.readLine())!= null){
+                System.out.println(linea);
+            }
+            br.close();
+            fr.close();
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Hubo un error leyendo el archivo "+e);
+        }
+    }
 }
