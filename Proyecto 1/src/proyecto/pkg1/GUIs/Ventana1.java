@@ -35,7 +35,7 @@ public class Ventana1 extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        ingresar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -50,18 +50,18 @@ public class Ventana1 extends javax.swing.JFrame {
         jLabel1.setText("Bienvenido!");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, 177, 62));
 
-        jButton1.setText("Ingresar archivo");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        ingresar.setText("Ingresar archivo");
+        ingresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                ingresarMouseClicked(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ingresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ingresarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 180, 30));
+        getContentPane().add(ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 180, 30));
 
         jButton2.setText("Ver grafo");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -92,35 +92,37 @@ public class Ventana1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void ingresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ingresarMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_ingresarMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarActionPerformed
         // TODO add your handling code here:
-        JFileChooser chooser = new JFileChooser();
-        int returnVal = chooser.showOpenDialog(null);
-        if(returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = chooser.getSelectedFile();
-            BufferedReader reader;
-            StringBuilder sb = new StringBuilder();
-            try {
-                reader = new BufferedReader(new FileReader(file));
-                String line = reader.readLine();
-                while (line != null) {
-                    sb.append(line);
-                    sb.append(System.lineSeparator());
-                    line = reader.readLine();
-                }
-                String fileContent = sb.toString();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            JOptionPane.showMessageDialog(null, "", "File Chooser", 0);
-}
-    }//GEN-LAST:event_jButton1ActionPerformed
+//        JFileChooser chooser = new JFileChooser();
+//        int returnVal = chooser.showOpenDialog(null);
+//        if(returnVal == JFileChooser.APPROVE_OPTION) {
+//            File file = chooser.getSelectedFile();
+//            BufferedReader reader;
+//            StringBuilder sb = new StringBuilder();
+//            try {
+//                reader = new BufferedReader(new FileReader(file));
+//                String line = reader.readLine();
+//                while (line != null) {
+//                    sb.append(line);
+//                    sb.append(System.lineSeparator());
+//                    line = reader.readLine();
+//                }
+//                String fileContent = sb.toString();
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            JOptionPane.showMessageDialog(null, "", "File Chooser", 0);
+        AbrirGuardarTxt archivo = new AbrirGuardarTxt();
+        archivo.setVisible(true);
+
+    }//GEN-LAST:event_ingresarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -166,7 +168,7 @@ public class Ventana1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton ingresar;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;

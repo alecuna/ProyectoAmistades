@@ -4,6 +4,11 @@
  */
 package proyecto.pkg1.GUIs;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.stream.Collectors;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -12,13 +17,43 @@ import javax.swing.JOptionPane;
  * @author Anabella Jaua
  */
 public class AbrirGuardarTxt extends javax.swing.JFrame {
-
+    JFileChooser seleccionar = new JFileChooser();
+    File archivo; 
+    FileInputStream entrada; 
+    FileOutputStream salida; 
     /**
      * Creates new form AbrirGuardarTxt
      */
     public AbrirGuardarTxt() {
         initComponents();
     }
+
+    public String AbrirArchivo(File archivo){
+        String documento="";
+        try{
+            entrada = new FileInputStream(archivo);
+            int ascci;
+            while((ascci = entrada.read())!=-1){
+                char caracter = (char) ascci; 
+                documento += caracter; 
+            }
+        }catch(Exception e){      
+        }
+        return documento; 
+    }
+    
+    public String GuardarArchivo(File archivo, String documento){
+        String mensaje = null; 
+        try {
+            salida = new FileOutputStream(archivo);
+            byte[] bytxt = documento.getBytes();
+            salida.write(bytxt);
+            mensaje="Archivo guardado";  
+        }catch(Exception e){
+        }
+        return mensaje;
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,22 +65,22 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        Guardar = new javax.swing.JButton();
         Abrir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        texto = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("Guardar Archivo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Guardar.setText("Guardar Archivo");
+        Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                GuardarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, -1, -1));
+        jPanel1.add(Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, -1, -1));
 
         Abrir.setText("Abrir Archivo");
         Abrir.addActionListener(new java.awt.event.ActionListener() {
@@ -55,9 +90,9 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
         });
         jPanel1.add(Abrir, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 120, -1));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        texto.setColumns(20);
+        texto.setRows(5);
+        jScrollPane1.setViewportView(texto);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 420, 240));
 
@@ -65,19 +100,33 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if (seleccionar.showDialog(null, "Guardar")== JFileChooser.APPROVE_OPTION){
+            archivo= seleccionar.getSelectedFile();
+            if (archivo.getName().endsWith("txt")){
+                String Documento = texto.getText();
+                String mensaje= GuardarArchivo(archivo,Documento);
+                if(mensaje!= null){
+                    JOptionPane.showMessageDialog(null, mensaje);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Archivo no Compatible");
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Guardar documento de Texto");
+            }
+        } 
+    }//GEN-LAST:event_GuardarActionPerformed
 
     private void AbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirActionPerformed
         // TODO add your handling code here:
@@ -86,7 +135,7 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
             if (archivo.canRead()){
                 if (archivo.getName().endsWith("txt")){
                     String documento = AbrirArchivo(archivo);
-                    txtarea1.setText(documento);
+                    texto.setText(documento);
                 }else{
                     JOptionPane.showMessageDialog(null, "Archivo No Compatible");
                 }
@@ -131,9 +180,9 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Abrir;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton Guardar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea texto;
     // End of variables declaration//GEN-END:variables
 }

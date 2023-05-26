@@ -26,9 +26,6 @@ public class FunctionsTXT extends javax.swing.JFrame {
     /**
      * Creates new form AbrirGuardarTxt
      */
-    public AbrirGuardarTxt() {
-        initComponents();
-    }
 
     public String AbrirArchivo(File archivo){
         String documento="";
