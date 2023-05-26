@@ -8,37 +8,26 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Anabella Jaua
+ * @author alexandralecuna
  */
-public class Lista<T> {
+public class ListaFriends {
     
-    private Nodo<T> head;
-    private Nodo<T> tail;
+    private NodoFriends head;
+    private NodoFriends tail;
     private int size;
 
-    /**
-     * Constructor para una lista vacia
-     */
-    public Lista() {
+    public ListaFriends() {
         this.head = null;
         this.tail = null;
         this.size = 0;
     }
+
     
-    /**
-     * Constructor con un primer el primer nodo
-     */
-    public Lista(Nodo node){
-        this.head = this.tail = node;
-        size = 1;
-    }
-    
-    public boolean isEmpty(){
+     public boolean isEmpty(){
         return head == null;
     }
     
-    public void insertBegin(T element) {
-        Nodo<T> node = new Nodo(element);
+    public void insertBegin(NodoFriends node) {
         
         if (isEmpty()){
             node.setNext(node);
@@ -54,9 +43,8 @@ public class Lista<T> {
         size ++;
     }
     
-    public void insertLast(T element){
-        Nodo<T> node = new Nodo(element);
-        
+    public void insertLast(NodoFriends node){
+   
         if (isEmpty()){
             node.setNext(node);
             node.setPrev(node);
@@ -75,7 +63,7 @@ public class Lista<T> {
     public void deleteFirst() {
 
         if (!isEmpty()) {
-            Nodo<T> pointer = getHead();
+            NodoFriends pointer = getHead();
             setHead(pointer.getNext());
             pointer.setNext(null);
             size--;
@@ -89,7 +77,7 @@ public class Lista<T> {
     public void deleteLast() {
 
         if (!isEmpty()) {
-            Nodo<T> pointer = getHead();
+            NodoFriends pointer = getHead();
 
             if (getSize() == 1) {
                 setHead(null);
@@ -113,7 +101,7 @@ public class Lista<T> {
             
             String aux = "[";
             for (int i = 0; i < getSize(); i++) {
-                T dato = getDato(i);
+                User dato = getDato(i);
                 if (i == getSize() - 1){
                     aux += dato + "]";
                 } else {
@@ -128,76 +116,34 @@ public class Lista<T> {
     }
     
     
-    public T getDato(int index) {
+    public User getDato(int index) {
         if (isEmpty()) {
             return null;
 
         } else {
-            Nodo<T> pointer = getHead();
+            NodoFriends pointer = getHead();
             int counter = 0;
             while (counter < index && pointer.getNext() != null) {
                 pointer = pointer.getNext();
                 counter++;
             }
-            return pointer.getElement();
+            return pointer.getFriend();
         }
     }
     
-    public Lista merge(Lista list1, Lista list2) {
-        Nodo pointer1 = list1.getHead();
-        Nodo pointer2 = list2.getHead();
-
-        Lista merged = new Lista();
-
-        while (pointer1 != null && pointer2 != null) {
-            if ((int) pointer1.getElement() < (int) pointer2.getElement()) {
-                merged.insertLast(pointer1.getElement());
-                pointer1 = pointer1.getNext();
-
-            } else {
-                merged.insertLast(pointer2.getElement());
-                pointer2 = pointer2.getNext();
-
-            }
-        }
-        while (pointer1 != null) {
-            merged.insertLast(pointer1.getElement());
-            pointer1 = pointer1.getNext();
-        }
-        while (pointer2 != null) {
-            merged.insertLast(pointer2.getElement());
-            pointer2 = pointer2.getNext();
-        }
-
-        return merged;
-    }
-    
-//    public boolean contains(String name){
-//        int start = 0;
-//        Nodo<String> current = getHead();
-//        while(start < getSize()  && current.getNext() != null){ 
-//          if(name.equals(current.getData())){
-//              return true;
-//          }
-//          current = current.getNext();
-//        }
-//        return false;
-//    }
-
-
-    public Nodo<T> getHead() {
+    public NodoFriends getHead() {
         return head;
     }
 
-    public void setHead(Nodo<T> head) {
+    public void setHead(NodoFriends head) {
         this.head = head;
     }
 
-    public Nodo<T> getTail() {
+    public NodoFriends getTail() {
         return tail;
     }
 
-    public void setTail(Nodo<T> tail) {
+    public void setTail(NodoFriends tail) {
         this.tail = tail;
     }
 
@@ -208,7 +154,5 @@ public class Lista<T> {
     public void setSize(int size) {
         this.size = size;
     }
-        
-    
     
 }

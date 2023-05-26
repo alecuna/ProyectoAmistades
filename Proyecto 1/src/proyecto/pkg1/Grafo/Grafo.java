@@ -12,52 +12,64 @@ import javax.swing.JOptionPane;
  */
 public class Grafo {
 
-    private Lista<Vertex>[] arrayAdj;
+    private ListaVertex<NodoVertex> userList;
+    private int Vmax; // numero maximo de vertices
     private int V; // numero de vertices
     private int A; // numero de aristas
 
-    public Grafo(int vertices) {
-        this.V = vertices;
+    public Grafo() {
+        this.Vmax = 100;
         this.A = 0;
-        this.arrayAdj = new Lista[vertices];
-        for (int i = 0; i < V; i++) {
-            arrayAdj[i] = new Lista<Vertex>();
-        }
+        this.userList = new ListaVertex<NodoVertex>();
     }
 
-    public void addArista(Vertex a, Vertex b) {
-        arrayAdj[a].insertLast(b);
-        arrayAdj[b].insertLast(a);
-        A++;
+    
+    public void newVertex(User currentUser) {
+        userList.insertLast(currentUser);
+        V++;
     }
+    
+
+    public void newEdge(User user1, User user2, int years) {
+        NodoFriends friend1 = new NodoFriends(years, user1);
+        NodoFriends friend2 = new NodoFriends(years, user2);
+
+        //inserta al user1 en la lista de amigos del user2 y viceversa
+        if (userList.checkUser(user1) && userList.checkUser(user2)) {
+
+            for (int i = 0; i < userList.getSize(); i++) {
+
+                if (userList.getDato(i).getElement().equals(user1)) {
+                    userList.getDato(i).getFriendList().insertLast(friend2);
+                }
+                
+                if (userList.getDato(i).getElement().equals(user2)) {
+                    userList.getDato(i).getFriendList().insertLast(friend1);
+                }
+                
+            } A++;
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Error. Alguno de los usuarios ingresados no existe.");
+        }
+
+    }
+    
 
     public void printVerts() {
 
         String sVerts = "";
         sVerts += V + " vertices, " + A + " aristas " + "\n";
         for (int i = 0; i < V; i++) {
-            Nodo pointer = arrayAdj[i].getHead();
-            sVerts += (i + " -> ");
-            for (int j = 0; j < arrayAdj[i].getSize(); j++) {
-                sVerts += arrayAdj[i].getDato(j).getUser().getUsername() + " ";
+            NodoVertex pointer = userList.getHead();
+            sVerts += (userList.getDato(i).getElement().getUsername() + " -> ");
+            for (int j = 0; j < userList.getDato(i).getFriendList().getSize(); j++) {
+                sVerts += "(" + userList.getDato(i).getFriendList().getDato(j).getUsername() + ")";
+                
             }
             sVerts += " \n";
+            System.out.println(sVerts);
         }
-        System.out.println(sVerts);
     }
-    
-    public int findVert(User currentUser) {
-        Vertex vert = new Vertex(currentUser);
-        boolean found = false;
-        int i = 0;
-        
-        for (i = 0 ; (i < V) && !found ; i++) {
-            
-            found = arrayAdj[i].equals(vert);
-            if (!found) i++;     
-        }
-        return (i < V) ? i : -1;
-    }
-    
 
 }
