@@ -19,6 +19,9 @@ public class main {
         txt.setVisible(true);
         txt.setLocationRelativeTo(null);
         txt.setResizable(false);
+        
+        Funciones2 func2 = new Funciones2();
+        func2.leertxt("C:\\Users\\hp\\Documents\\usuarios.txt"); //En esta parte iria lo de absolute path
 
     }
     

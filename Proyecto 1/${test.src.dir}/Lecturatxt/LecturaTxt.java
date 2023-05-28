@@ -2,6 +2,7 @@
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /*
@@ -15,7 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class LecturaTxt {
     public String leertxt(String url){
-        String line; 
+        String line;  
         String grafo_txt="";
         File file = new File(url);
         try{
@@ -27,13 +28,23 @@ public class LecturaTxt {
                 while((line = br.readLine())!= null){
                     if (!line.isEmpty()){
                         grafo_txt += line+ "\n";
-                    }
+                        
+                        
+                    } 
                 }
                 br.close();
+                
+               
                 JOptionPane.showMessageDialog(null, "Lectura Exitosa");
+                
             }
         }catch(Exception err){
              JOptionPane.showMessageDialog(null, "Error al momento de leer los clientes");
+        }
+//        System.out.println(grafo_txt);
+        Scanner scanner = new Scanner(grafo_txt);
+        while (scanner.hasNextLine()){
+            System.out.println(scanner.nextLine());
         }
         return grafo_txt;
     }
