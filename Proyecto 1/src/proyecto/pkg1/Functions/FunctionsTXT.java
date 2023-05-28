@@ -11,6 +11,7 @@ package proyecto.pkg1.Functions;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.Scanner;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -18,7 +19,7 @@ import javax.swing.JOptionPane;
  *
  * @author Maria Daniela
  */
-public class FunctionsTXT extends javax.swing.JFrame {
+public class FunctionsTXT {
     JFileChooser seleccionar = new JFileChooser();
     File archivo; 
     FileInputStream entrada; 
@@ -52,5 +53,15 @@ public class FunctionsTXT extends javax.swing.JFrame {
         }
         return mensaje;
     }
-}
 
+
+//    public boolean validarTXT (String contenido){
+//        Scanner sc = new Scanner(contenido);
+//        String thisLine = sc.nextLine();
+//        while (thisLine != "Relaciones"){
+//            thisLine = sc.nextLine();
+//            
+//            
+//        }
+//    }
+}

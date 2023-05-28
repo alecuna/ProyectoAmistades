@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.util.stream.Collectors;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import proyecto.pkg1.Functions.FunctionsTXT;
 
 /**
  *
@@ -21,9 +22,9 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
     File archivo; 
     FileInputStream entrada; 
     FileOutputStream salida; 
-    /**
-     * Creates new form AbrirGuardarTxt
-     */
+//    /**
+//     * Creates new form AbrirGuardarTxt
+//     */
     public AbrirGuardarTxt() {
         initComponents();
     }
@@ -31,35 +32,36 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
     public File getArchivo() {
         return archivo;
     }
+//
+//    
+//    public String AbrirArchivo(File archivo){
+//        String documento="";
+//        try{
+//            entrada = new FileInputStream(archivo);
+//            int ascci;
+//            while((ascci = entrada.read())!=-1){
+//                char caracter = (char) ascci; 
+//                documento += caracter; 
+//            }
+//            String url = archivo.getPath();
+//        }catch(Exception e){      
+//        }
+//        return documento; 
+//    }
+//    
+//    public String GuardarArchivo(File archivo, String documento){
+//        String mensaje = null; 
+//        try {
+//            salida = new FileOutputStream(archivo);
+//            byte[] bytxt = documento.getBytes();
+//            salida.write(bytxt);
+//            mensaje="Archivo guardado";  
+//        }catch(Exception e){
+//        }
+//        return mensaje;
+//    }
 
-    
-    public String AbrirArchivo(File archivo){
-        String documento="";
-        try{
-            entrada = new FileInputStream(archivo);
-            int ascci;
-            while((ascci = entrada.read())!=-1){
-                char caracter = (char) ascci; 
-                documento += caracter; 
-            }
-        }catch(Exception e){      
-        }
-        return documento; 
-    }
-    
-    public String GuardarArchivo(File archivo, String documento){
-        String mensaje = null; 
-        try {
-            salida = new FileOutputStream(archivo);
-            byte[] bytxt = documento.getBytes();
-            salida.write(bytxt);
-            mensaje="Archivo guardado";  
-        }catch(Exception e){
-        }
-        return mensaje;
-    }
-
-
+    FunctionsTXT f = new FunctionsTXT();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,9 +76,14 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
         Abrir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         texto = new javax.swing.JTextArea();
+        exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setUndecorated(true);
+        setResizable(false);
 
+        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Guardar.setText("Guardar Archivo");
@@ -85,7 +92,7 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
                 GuardarActionPerformed(evt);
             }
         });
-        jPanel1.add(Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, -1, -1));
+        jPanel1.add(Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 140, 30));
 
         Abrir.setText("Abrir Archivo");
         Abrir.addActionListener(new java.awt.event.ActionListener() {
@@ -93,23 +100,35 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
                 AbrirActionPerformed(evt);
             }
         });
-        jPanel1.add(Abrir, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 120, -1));
+        jPanel1.add(Abrir, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 140, 30));
 
         texto.setColumns(20);
         texto.setRows(5);
         jScrollPane1.setViewportView(texto);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 420, 240));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 420, 240));
+
+        exit.setBackground(new java.awt.Color(204, 204, 255));
+        exit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        exit.setForeground(new java.awt.Color(153, 153, 255));
+        exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/pkg1/GUIs/Images/button.png"))); // NOI18N
+        exit.setContentAreaFilled(false);
+        exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitActionPerformed(evt);
+            }
+        });
+        jPanel1.add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 50, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
         );
 
         pack();
@@ -121,7 +140,7 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
             archivo= seleccionar.getSelectedFile();
             if (archivo.getName().endsWith("txt")){
                 String Documento = texto.getText();
-                String mensaje= GuardarArchivo(archivo,Documento);
+                String mensaje= f.GuardarArchivo(archivo,Documento);
                 if(mensaje!= null){
                     JOptionPane.showMessageDialog(null, mensaje);
                 }else{
@@ -139,7 +158,7 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
             archivo = seleccionar.getSelectedFile();
             if (archivo.canRead()){
                 if (archivo.getName().endsWith("txt")){
-                    String documento = AbrirArchivo(archivo);
+                    String documento = f.AbrirArchivo(archivo);
                     texto.setText(documento);
                 }else{
                     JOptionPane.showMessageDialog(null, "Archivo No Compatible");
@@ -147,6 +166,14 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_AbrirActionPerformed
+
+    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
+        // TODO add your handling code here:
+        int response = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea salir? Los cambios no guardados seran eliminados.");
+        if (response == JOptionPane.YES_OPTION) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_exitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,6 +213,7 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Abrir;
     private javax.swing.JButton Guardar;
+    private javax.swing.JButton exit;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea texto;

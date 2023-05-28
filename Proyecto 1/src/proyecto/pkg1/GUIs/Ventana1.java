@@ -36,9 +36,9 @@ public class Ventana1 extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         ingresar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        ShowGraph = new javax.swing.JButton();
+        ShowIslas = new javax.swing.JButton();
+        ShowPuentes = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
@@ -63,24 +63,24 @@ public class Ventana1 extends javax.swing.JFrame {
         });
         getContentPane().add(ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 180, 30));
 
-        jButton2.setText("Ver grafo");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        ShowGraph.setText("Ver grafo");
+        ShowGraph.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                ShowGraphActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 180, 30));
+        getContentPane().add(ShowGraph, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 180, 30));
 
-        jButton3.setText("Ver cantidad de islas");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, 180, 30));
+        ShowIslas.setText("Ver cantidad de islas");
+        getContentPane().add(ShowIslas, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, 180, 30));
 
-        jButton5.setText("Identificar puentes");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        ShowPuentes.setText("Identificar puentes");
+        ShowPuentes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                ShowPuentesActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 180, 30));
+        getContentPane().add(ShowPuentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 180, 30));
 
         jButton6.setText("Modificar grafo");
         getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 180, 30));
@@ -122,18 +122,16 @@ public class Ventana1 extends javax.swing.JFrame {
         AbrirGuardarTxt archivo = new AbrirGuardarTxt();
         archivo.setVisible(true);
         archivo.setLocationRelativeTo(null);
-//        String doc = archivo.AbrirArchivo(archivo.getArchivo());
-//        String mensaje = archivo.GuardarArchivo(archivo.getArchivo(), doc);
-//        JOptionPane.showMessageDialog(null, mensaje);
+
     }//GEN-LAST:event_ingresarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void ShowGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowGraphActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_ShowGraphActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void ShowPuentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowPuentesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_ShowPuentesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,10 +169,10 @@ public class Ventana1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ShowGraph;
+    private javax.swing.JButton ShowIslas;
+    private javax.swing.JButton ShowPuentes;
     private javax.swing.JButton ingresar;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
