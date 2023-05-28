@@ -19,7 +19,8 @@ public class Main {
         // TODO code application logic here
         Ventana1 window = new Ventana1();
         window.setVisible(true);
-        
+        window.setLocationRelativeTo(null);
+        window.setResizable(false);
     }
     
 }

@@ -28,6 +28,11 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
         initComponents();
     }
 
+    public File getArchivo() {
+        return archivo;
+    }
+
+    
     public String AbrirArchivo(File archivo){
         String documento="";
         try{
@@ -100,7 +105,7 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

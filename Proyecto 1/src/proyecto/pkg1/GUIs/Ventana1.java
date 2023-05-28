@@ -61,7 +61,7 @@ public class Ventana1 extends javax.swing.JFrame {
                 ingresarActionPerformed(evt);
             }
         });
-        getContentPane().add(ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 180, 30));
+        getContentPane().add(ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 180, 30));
 
         jButton2.setText("Ver grafo");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -69,10 +69,10 @@ public class Ventana1 extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 180, 30));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 180, 30));
 
         jButton3.setText("Ver cantidad de islas");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 180, 30));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, 180, 30));
 
         jButton5.setText("Identificar puentes");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -80,14 +80,14 @@ public class Ventana1 extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, 180, 30));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 180, 30));
 
         jButton6.setText("Modificar grafo");
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 180, 30));
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 180, 30));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/pkg1/GUIs/Images/Background.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-140, -100, 710, 570));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-140, -100, 820, 610));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -121,7 +121,10 @@ public class Ventana1 extends javax.swing.JFrame {
 //            JOptionPane.showMessageDialog(null, "", "File Chooser", 0);
         AbrirGuardarTxt archivo = new AbrirGuardarTxt();
         archivo.setVisible(true);
-
+        archivo.setLocationRelativeTo(null);
+//        String doc = archivo.AbrirArchivo(archivo.getArchivo());
+//        String mensaje = archivo.GuardarArchivo(archivo.getArchivo(), doc);
+//        JOptionPane.showMessageDialog(null, mensaje);
     }//GEN-LAST:event_ingresarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
