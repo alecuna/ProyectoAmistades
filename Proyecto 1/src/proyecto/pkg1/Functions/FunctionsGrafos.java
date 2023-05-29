@@ -4,10 +4,19 @@
  */
 package proyecto.pkg1.Functions;
 
+import proyecto.pkg1.Grafo.Grafo;
+
 /**
  *
  * @author Anabella Jaua
  */
 public class FunctionsGrafos {
+    private Grafo grafoActual;
+    
+    
+    
+    public void crearGrafo(Grafo grafoActual){
+        
+    }
     
 }

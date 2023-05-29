@@ -32,16 +32,16 @@ public class LeerArchivo {
                     } 
                 }
                 br.close();
-                JOptionPane.showMessageDialog(null, "Lectura Exitosa");
+//                JOptionPane.showMessageDialog(null, "Lectura Exitosa");
             }
         }catch(Exception err){
              JOptionPane.showMessageDialog(null, "Error");
         }
 
-        Scanner scanner = new Scanner(grafo_txt);
-        while (scanner.hasNextLine()){
-            System.out.println(scanner.nextLine());
-        }
+//        Scanner scanner = new Scanner(grafo_txt);
+//        while (scanner.hasNextLine()){
+//            System.out.println(scanner.nextLine());
+//        }
         return grafo_txt;
     }
 }

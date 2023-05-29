@@ -39,7 +39,8 @@ public class Ventana1 extends javax.swing.JFrame {
         ShowGraph = new javax.swing.JButton();
         ShowIslas = new javax.swing.JButton();
         ShowPuentes = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        addUser = new javax.swing.JButton();
+        deleteUser = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -82,8 +83,21 @@ public class Ventana1 extends javax.swing.JFrame {
         });
         getContentPane().add(ShowPuentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 180, 30));
 
-        jButton6.setText("Modificar grafo");
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 180, 30));
+        addUser.setText("Agregar usuario");
+        addUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addUserActionPerformed(evt);
+            }
+        });
+        getContentPane().add(addUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 180, 30));
+
+        deleteUser.setText("Eliminar usuario");
+        deleteUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteUserActionPerformed(evt);
+            }
+        });
+        getContentPane().add(deleteUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, 180, 30));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/pkg1/GUIs/Images/Background.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
@@ -133,6 +147,19 @@ public class Ventana1 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ShowPuentesActionPerformed
 
+    private void addUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserActionPerformed
+       AgregarUser add = new AgregarUser();
+       add.setVisible(true);
+       add.setLocationRelativeTo(null);
+       
+    }//GEN-LAST:event_addUserActionPerformed
+
+    private void deleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserActionPerformed
+        EliminarUser delete = new EliminarUser();
+        delete.setVisible(true);
+        delete.setLocationRelativeTo(null);
+    }//GEN-LAST:event_deleteUserActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -172,8 +199,9 @@ public class Ventana1 extends javax.swing.JFrame {
     private javax.swing.JButton ShowGraph;
     private javax.swing.JButton ShowIslas;
     private javax.swing.JButton ShowPuentes;
+    private javax.swing.JButton addUser;
+    private javax.swing.JButton deleteUser;
     private javax.swing.JButton ingresar;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

@@ -26,7 +26,7 @@ public class ListaVertex<T> {
     }
 
     /**
-     * Constructor con un primer el primer nodo
+     * Constructor con el primer nodo
      */
     public ListaVertex(NodoVertex node) {
         this.head = this.tail = node;
