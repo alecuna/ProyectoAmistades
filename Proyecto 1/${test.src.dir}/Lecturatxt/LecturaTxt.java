@@ -2,6 +2,7 @@
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.PrintWriter;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
@@ -15,6 +16,21 @@ import javax.swing.JOptionPane;
  * @author Maria Daniela
  */
 public class LecturaTxt {
+    public void escribir_txt(){
+        
+        try{
+            PrintWriter pw = new PrintWriter("test\\txt.txt");
+            pw.append("Valeria,30112727");
+            pw.append("\n");
+            pw.append("Cesar,15412727");
+            pw.close();
+            JOptionPane.showMessageDialog(null, "Guardado exitoso");
+            
+        }catch(Exception err){
+            JOptionPane.showMessageDialog(null, err);
+        }
+    }
+    
     public String leertxt(String url){
         String line;  
         String grafo_txt="";
