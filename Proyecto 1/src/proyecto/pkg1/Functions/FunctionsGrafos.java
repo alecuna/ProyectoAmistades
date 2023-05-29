@@ -11,12 +11,17 @@ import proyecto.pkg1.Grafo.Grafo;
  * @author Anabella Jaua
  */
 public class FunctionsGrafos {
-    private Grafo grafoActual;
+    
+    LeerArchivo f = new LeerArchivo();
+    FunctionsTXT use = new FunctionsTXT();
+    String infoGrafo = f.leertxt("test\\TxtProyecto.txt");
+    String[] users = use.getUsuarios(infoGrafo);
+    String[] relaciones = use.getRelaciones(infoGrafo);
+    
+//    public Grafo crearGrafo(String[] users, String[] relaciones){
+//       return Grafo; 
+//    }
     
     
-    
-    public void crearGrafo(Grafo grafoActual){
-        
-    }
     
 }
