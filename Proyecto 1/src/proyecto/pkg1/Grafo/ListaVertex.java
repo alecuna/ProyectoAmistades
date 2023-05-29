@@ -54,7 +54,7 @@ public class ListaVertex<T> {
         size++;
     }
 
-    public void insertLast(User element) {
+    public void insertFinal(User element) {
         NodoVertex<User> node = new NodoVertex(element);
 
         if (isEmpty()) {
@@ -67,10 +67,94 @@ public class ListaVertex<T> {
             getTail().setNext(node);
             node.setPrev(tail);
             setTail(node);
+            node.setNext(getHead());
+            
 
         }
         size++;
     }
+    
+    
+    
+    public NodoVertex deleteBegin(){
+        if (isEmpty()) {
+            System.out.println("List is Empty");
+        } else {
+            NodoVertex pointer = getHead();
+            NodoVertex pointer2 = getHead();
+            setHead((NodoVertex) getHead().getNext());
+            while (pointer.getNext() != pointer2) {
+                pointer = (NodoVertex) pointer.getNext();
+            }
+            pointer.setNext(getHead());
+            pointer2.setNext(null);
+            size--;
+            return pointer;
+        }
+        
+        return null;
+    }
+    
+    
+    
+    
+    public NodoVertex deleteFinal(){
+        if (isEmpty()) {
+            System.out.println("List is Empty");
+        } else {
+            NodoVertex pointer = getHead();
+            NodoVertex pointer2;
+            
+            if (size > 1){
+                while (((pointer.getNext())).getNext() != getHead()) {
+                    pointer = pointer.getNext();
+                }
+                pointer2 = pointer.getNext();
+                pointer2.setNext(null);
+                pointer.setNext(getHead());
+            } else {
+                pointer2 = deleteBegin();
+            }
+            size--;
+            return pointer2;
+        }
+        
+        return null;
+    }
+    
+    public NodoVertex deleteInIndex(int index){
+        if (isEmpty()) {
+            System.out.println("List is Empty");
+        } else {
+            if (index == 0){
+                deleteBegin();
+            } else {
+                if (index < size) {
+                    if(index == size - 1) {
+                        deleteFinal();
+                    } else {
+                        NodoVertex pointer = getHead();
+                        NodoVertex pointer2;
+                        int cont = 0;
+                        while ( cont< index-1 ) {
+                            pointer = (NodoVertex) pointer.getNext();
+                            cont++;
+                        }
+                        pointer2 = (NodoVertex) pointer.getNext();
+                        pointer.setNext((NodoVertex) pointer2.getNext());
+                        pointer2.setNext(null);
+                        return pointer2;
+                    }
+                    
+                } else {
+                    System.out.println("Error in index");
+                }
+            }
+        }
+        size--;
+        return null;
+    }
+    
 
     public void deleteFirst() {
 

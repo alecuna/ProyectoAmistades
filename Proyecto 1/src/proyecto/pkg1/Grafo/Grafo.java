@@ -23,13 +23,24 @@ public class Grafo {
         this.userList = new ListaVertex<NodoVertex>();
     }
 
-    
-    public void newVertex(User currentUser) {
-        userList.insertLast(currentUser);
+    /**
+     * Agrega un vertice en la lista de usuarios
+     *
+     * @param User (nuevo usuario)
+     */
+    public void newVertex(User usuario) {
+        userList.insertFinal(usuario);
         V++;
     }
-    
 
+    /**
+     * Agrega una arista (coneccion) entre dos vertices (usuarios) ya existentes
+     *
+     * @param User1
+     * @param User2
+     * @param Years (cantidad de años de amistad entre usuarios), weight de la
+     * arista
+     */
     public void newEdge(User user1, User user2, int years) {
         NodoFriends friend1 = new NodoFriends(years, user1);
         NodoFriends friend2 = new NodoFriends(years, user2);
@@ -42,20 +53,51 @@ public class Grafo {
                 if (userList.getDato(i).getElement().equals(user1)) {
                     userList.getDato(i).getFriendList().insertLast(friend2);
                 }
-                
+
                 if (userList.getDato(i).getElement().equals(user2)) {
                     userList.getDato(i).getFriendList().insertLast(friend1);
                 }
-                
-            } A++;
+
+            }
+            A++;
 
         } else {
             JOptionPane.showMessageDialog(null, "Error. Alguno de los usuarios ingresados no existe.");
         }
 
     }
-    
 
+    public void deleteVertex(User usuario) {
+        if (userList.checkUser(usuario)) {
+
+            for (int i = 0; i < userList.getSize(); i++) {
+
+                // elimina al usuario de la lista de vertices
+                if (userList.getDato(i).getElement().equals(usuario)) {
+                    userList.deleteInIndex(i);
+
+                    // elimina al usuario de la lista de amigos de los otros usuarios
+                } else {
+                    NodoFriends pointer = userList.getDato(i).getFriendList().getHead();
+                    for (int j = 0; j < userList.getDato(i).getFriendList().getSize(); j++) {
+                        if (userList.getDato(i).getFriendList().checkUser(usuario)) {
+                            userList.getDato(i).getFriendList().deleteInIndex(j);
+                        }
+
+                    }
+
+                }
+
+            }
+            V--;
+        } else {
+            JOptionPane.showMessageDialog(null, "Error. El usuario que desea eliminar no existe.");
+        }
+    }
+
+    /**
+     * Imprime en la terminal los vertices y aristas almacenados
+     */
     public void printVerts() {
 
         String sVerts = "";
@@ -64,8 +106,8 @@ public class Grafo {
             NodoVertex pointer = userList.getHead();
             sVerts += (userList.getDato(i).getElement().getUsername() + " -> ");
             for (int j = 0; j < userList.getDato(i).getFriendList().getSize(); j++) {
-                sVerts += "(" + userList.getDato(i).getFriendList().getDato(j).getUsername() + ")";
-                
+                sVerts += "(" + userList.getDato(i).getFriendList().getDato(j).getFriend().getUsername() + ", " + userList.getDato(i).getFriendList().getDato(j).getWeight() + ")";
+
             }
             sVerts += " \n";
             System.out.println(sVerts);
