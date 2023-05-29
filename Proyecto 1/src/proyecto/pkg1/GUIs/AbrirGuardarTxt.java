@@ -29,7 +29,9 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
     File archivo; 
     FileInputStream entrada; 
     FileOutputStream salida;
- 
+    public static String[] usuarios;
+    public static String[] relaciones;
+    private String contenidoFile;
   
 //    /**
 //     * Creates new form AbrirGuardarTxt
@@ -39,6 +41,9 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
         
     }
 
+   
+
+    
     public File getArchivo() {
         return archivo;
     }
@@ -172,7 +177,7 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
-        // TODO add your handling code here:
+// Boton que permite guardar la informacion del archivo seleccionado por el usuario en el sistema
 //        if (seleccionar.showDialog(null, "Guardar")== JFileChooser.APPROVE_OPTION){
 //            archivo= seleccionar.getSelectedFile();
 //            if (archivo.getName().endsWith("txt")){
@@ -189,43 +194,55 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
 //        } 
 //        if (seleccionar.showDialog(null, "Guardar Cambios")== JFileChooser.APPROVE_OPTION){   
 //        }
-        File arch = seleccionar.getSelectedFile();
-        String path = arch.getAbsolutePath();
-        String contenido = content.leertxt(path);
-        
-        File database = new File("..\\TxtProyecto.txt"); 
-        FileWriter fw = null;
-        FileReader fr = null;
-        try {
-            fw = new FileWriter(database);
-            fr = new FileReader(database);
-        } catch (IOException ex) {
-            Logger.getLogger(AbrirGuardarTxt.class.getName()).log(Level.SEVERE, null, ex);
+//        File arch = seleccionar.getSelectedFile();
+//        String path = arch.getAbsolutePath();
+//        String contenido = content.leertxt(path);
+//        
+//        File database = new File("..\\TxtProyecto.txt"); 
+//        FileWriter fw = null;
+//        FileReader fr = null;
+//        try {
+//            fw = new FileWriter(database);
+//            fr = new FileReader(database);
+//        } catch (IOException ex) {
+//            Logger.getLogger(AbrirGuardarTxt.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        BufferedWriter bw = new BufferedWriter(fw);
+//        BufferedReader br = new BufferedReader(fr);
+//        
+//        String[] contenidoUsers = f.getUsuarios(contenido);
+//        String[] contenidoRelaciones = f.getRelaciones(contenido);
+//        try{
+//            if (br.readLine().equals("Usuarios" )){
+//                for (int i = 1; i < contenidoUsers.length; i++) {
+//                    bw.append("\n"+contenidoUsers[i]);
+//                }}
+//            if (br.readLine().equals("Relaciones")){
+//                for (int i = 1; i < contenidoRelaciones.length; i++) {
+//                    bw.append("\n"+contenidoRelaciones[i]);
+//                }}
+//            bw.close();
+//            br.close();
+//        } catch (Exception e){
+//        Logger.getLogger(AbrirGuardarTxt.class.getName()).log(Level.SEVERE, null, e);
+//        } 
+        int response = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea guardar los nuevos datos? Se reemplazara la base de datos existente en el sistema");
+        if (response == JOptionPane.YES_OPTION) {
+            f.escribir_txt(contenidoFile);
+            usuarios = f.getUsuarios(contenidoFile);
+            relaciones = f.getRelaciones(contenidoFile);
+            this.dispose();
         }
-        BufferedWriter bw = new BufferedWriter(fw);
-        BufferedReader br = new BufferedReader(fr);
+        else{
+            JOptionPane.showMessageDialog(null, "No se han guardado los datos");
+        }    
+
         
-        String[] contenidoUsers = f.getUsuarios(contenido);
-        String[] contenidoRelaciones = f.getRelaciones(contenido);
-        try{
-            if (br.readLine().equals("Usuarios" )){
-                for (int i = 1; i < contenidoUsers.length; i++) {
-                    bw.append("\n"+contenidoUsers[i]);
-                }}
-            if (br.readLine().equals("Relaciones")){
-                for (int i = 1; i < contenidoRelaciones.length; i++) {
-                    bw.append("\n"+contenidoRelaciones[i]);
-                }}
-            bw.close();
-            br.close();
-        } catch (Exception e){
-        Logger.getLogger(AbrirGuardarTxt.class.getName()).log(Level.SEVERE, null, e);
-        } 
-        
+       
     }//GEN-LAST:event_GuardarActionPerformed
 
     private void AbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirActionPerformed
-        // TODO add your handling code here:
+        // Boton que permite seleccionar archivo y verifica que se cumpla la estructura requerida
         if (seleccionar.showDialog(null, "Abrir")==JFileChooser.APPROVE_OPTION){
             archivo = seleccionar.getSelectedFile();
             if (archivo.canRead()){
@@ -233,8 +250,8 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
                     String documento = f.AbrirArchivo(archivo);
                     texto.setText(documento);
                     String path = archivo.getAbsolutePath();
-                    String contenido = content.leertxt(path);
-                    if (!f.validarTxt(contenido)){
+                    contenidoFile = content.leertxt(path);
+                    if (!f.validarTxt(contenidoFile)){
                         JOptionPane.showMessageDialog(null, "El contenido del archivo no cumple con la estructura requerida\nPor favor intentelo de nuevo");
                     } 
                 }else{

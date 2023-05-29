@@ -11,7 +11,9 @@ package proyecto.pkg1.Functions;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -24,6 +26,11 @@ public class FunctionsTXT {
      * Creates new form AbrirGuardarTxt
      */
 
+    /**
+     * Funcion que abre el archivo txt
+     * @param archivo, File seleccionado por el usuario
+     * @return String documento, contenido del archivo seleccionado
+     */
     public String AbrirArchivo(File archivo){
         String documento="";
         try{
@@ -50,7 +57,11 @@ public class FunctionsTXT {
         return mensaje;
     }
 
-
+    /**
+     * Funcion que valida que el contenido del txt cumpla con la estructura requerida
+     * @param contenido, contenido del archivo seleccionado por el usuario
+     * @return boolean true si el archivo es valido
+     */
     public boolean validarTxt(String contenido){
          if (!contenido.contains("Usuarios") || !contenido.contains("Relaciones")){
              return false;
@@ -91,6 +102,11 @@ public class FunctionsTXT {
           
        }
     
+    /**
+     * Funcion que separa el contenido del archivo para obtener el array de usuarios
+     * @param content, contenido del archivo seleccionado por el usuario
+     * @return Array users, array de usuarios con sus ids y @usernames
+     */
     public String[] getUsuarios (String content){
         String[] separar = content.split("Relaciones");
         String usuarios = separar [0];
@@ -98,12 +114,48 @@ public class FunctionsTXT {
         return users;
     }
     
+    /**
+     * Funcion que separa el contenido del archivo para obtener el array de relaciones
+     * @param content, contenido del archivo seleccionado por el usuario
+     * @return Array users, array de relaciones cada una con los ids de cada usuario y sus años de amistad
+     */
     public String[] getRelaciones (String content){
         String[] separar = content.split("Relaciones");
         String relaciones = separar[1];
         String[] relations = relaciones.split("\n");
         return relations;
     }
+       
+//    public boolean validarUsers (String[] users, String usuario1, String usuario2, int id1, int id2){
+//        boolean value = true;
+//        for (int i = 0; i < users.length-1; i++) {
+//            String[] data = users[i].trim().split(",");
+//            String id = data[0];
+//            String username = data[1];
+//            if(Integer.parseInt(id) == id1){
+//                
+//                
+//            }
+//        }
+//        
+//    }
+    
+    /**
+     * Funcion que permite reemplazar la informacion del TXT del sistema con la informacion subida por el usuario
+     * @param contenido, informacion contenida el archivo seleccionado por el usuario
+     */
+    public void escribir_txt(String contenido){
         
+        try{
+            PrintWriter pw = new PrintWriter("test\\TxtProyecto.txt");
+            pw.append(contenido);
+            
+            pw.close();
+            JOptionPane.showMessageDialog(null, "Guardado exitoso");
+            
+        }catch(Exception err){
+            JOptionPane.showMessageDialog(null, err);
+        }
+    }
     
 }

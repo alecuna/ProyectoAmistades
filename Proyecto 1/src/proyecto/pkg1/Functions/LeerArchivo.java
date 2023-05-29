@@ -15,6 +15,11 @@ import javax.swing.JOptionPane;
  */
 public class LeerArchivo {
 
+    /**
+     * Funcion para guardar el contenido del archivo seleccionado como string
+     * @param url, path del archivo seleccionado por el usuario
+     * @return String grafo_txt, contenido del archivo seleccionado
+     */
     public String leertxt(String url){
 
         String line;  
