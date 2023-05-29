@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
  * @author alexandralecuna
  */
 public class ListaFriends {
-    
+
     private NodoFriends head;
     private NodoFriends tail;
     private int size;
@@ -22,28 +22,29 @@ public class ListaFriends {
         this.size = 0;
     }
 
-    
-     public boolean isEmpty(){
+    public boolean isEmpty() {
         return head == null;
     }
-    
+
     public void insertBegin(NodoFriends node) {
-        
-        if (isEmpty()){
+
+        if (isEmpty()) {
             node.setNext(node);
             node.setPrev(node);
             setHead(node);
             setTail(node);
-            
+
         } else {
             node.setNext(head);
             head.setPrev(node);
             setHead(node);
         }
-        size ++;
+        size++;
     }
+
     
-     public void insertLast(NodoFriends node) {
+    
+    public void insertLast(NodoFriends node) {
 
         if (isEmpty()) {
             node.setNext(node);
@@ -113,6 +114,10 @@ public class ListaFriends {
             if (index > getSize()) {
                 System.out.println("The index is bigger than the size");
                 return deleteFinal();
+                
+            } else if (index == 0){
+                deleteFirst();
+                
             } else {
                 if (index > getSize() / 2) {
                     pointer = getTail();
@@ -127,6 +132,7 @@ public class ListaFriends {
                     temp.setNext(null);
                     temp.setPrev(null);
                     size--;
+                    return temp;
 
                 } else {
                     pointer = getHead();
@@ -141,31 +147,34 @@ public class ListaFriends {
                     temp.setNext(null);
                     temp.setPrev(null);
                     size--;
+                    return temp;
                 }
             }
         }
         return null;
     }
 
+
     
-    public void printList(){
-        if (!isEmpty()){
-            
+    public void printList() {
+        if (!isEmpty()) {
+
             String aux = "[";
             for (int i = 0; i < getSize(); i++) {
-                User dato = getDato(i).getFriend();
-                if (i == getSize() - 1){
+                String dato = getDato(i).getFriend().getUsername();
+                if (i == getSize() - 1) {
                     aux += dato + "]";
                 } else {
-                aux += dato + ",";
+                    aux += dato + ",";
                 }
             }
             System.out.println(aux);
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "The list is currently empty.");
         }
     }
+
     
     
     public NodoFriends getDato(int index) {
@@ -182,7 +191,7 @@ public class ListaFriends {
             return pointer;
         }
     }
-    
+
     public boolean checkUser(User currentUser) {
         boolean found = false;
         for (int i = 0; i < getSize(); i++) {
@@ -193,7 +202,7 @@ public class ListaFriends {
         }
         return found;
     }
-    
+
     public NodoFriends getHead() {
         return head;
     }
@@ -217,5 +226,5 @@ public class ListaFriends {
     public void setSize(int size) {
         this.size = size;
     }
-    
+
 }

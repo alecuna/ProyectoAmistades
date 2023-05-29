@@ -155,43 +155,8 @@ public class ListaVertex<T> {
         return null;
     }
     
-
-    public void deleteFirst() {
-
-        if (!isEmpty()) {
-            NodoVertex<User> pointer = getHead();
-            setHead(pointer.getNext());
-            pointer.setNext(null);
-            size--;
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Error. Cannot delete node because the list is empty.");
-
-        }
-    }
-
-    public void deleteLast() {
-
-        if (!isEmpty()) {
-            NodoVertex<User> pointer = getHead();
-
-            if (getSize() == 1) {
-                setHead(null);
-
-            } else {
-                while (pointer.getNext() != null && pointer.getNext().getNext() != null) {
-                    pointer = pointer.getNext();
-                }
-                pointer.setNext(null);
-                setTail(pointer);
-                size--;
-            }
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Error. Cannot delete node because the list is empty.");
-        }
-    }
-
+    
+    
     public void printList() {
         if (!isEmpty()) {
 
@@ -245,21 +210,21 @@ public class ListaVertex<T> {
 //
 //        while (pointer1 != null && pointer2 != null) {
 //            if ((int) pointer1.getElement() < (int) pointer2.getElement()) {
-//                merged.insertLast(pointer1.getElement());
+//                merged.insertFinal(pointer1.getElement());
 //                pointer1 = pointer1.getNext();
 //
 //            } else {
-//                merged.insertLast(pointer2.getElement());
+//                merged.insertFinal(pointer2.getElement());
 //                pointer2 = pointer2.getNext();
 //
 //            }
 //        }
 //        while (pointer1 != null) {
-//            merged.insertLast(pointer1.getElement());
+//            merged.insertFinal(pointer1.getElement());
 //            pointer1 = pointer1.getNext();
 //        }
 //        while (pointer2 != null) {
-//            merged.insertLast(pointer2.getElement());
+//            merged.insertFinal(pointer2.getElement());
 //            pointer2 = pointer2.getNext();
 //        }
 //
