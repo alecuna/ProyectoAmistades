@@ -126,11 +126,15 @@ public class Grafo {
     public boolean checkAdj(User user1, User user2) {
         boolean adj = false;
         for (int i = 0; i < userList.getSize(); i++) {
-            for (int j = 0; j < userList.getDato(i).getFriendList().getSize(); j++) {
-                User currentUser = userList.getDato(i).getFriendList().getDato(j).getFriend();
-                if (currentUser == user1) {
-                    adj = true;
+            User currentUser = userList.getDato(i).getElement();
+            if (currentUser == user1) {
+                for (int j = 0; j < userList.getDato(i).getFriendList().getSize(); j++) {
+
+                    if (userList.getDato(i).getFriendList().getDato(j).getFriend() == user2) {
+                        adj = true;
+                    }
                 }
+
             }
         }
         return adj;
@@ -184,16 +188,18 @@ public class Grafo {
         return -1;
     }
 
-    public ListaVertex BFS() throws Exception {
+    public int BFS() throws Exception {
 
         Queue<User> cola = new Queue<>();
         ListaVertex<User> usuariosVisitados = new ListaVertex<>();
         boolean visitados[] = new boolean[V];
         User currentUser;
+        int contIslas = 0;
 
         for (int i = 0; i < V; i++) {
             visitados[i] = false;
         }
+
         for (int i = 0; i < V; i++) {
 
             if (!visitados[i]) {
@@ -212,9 +218,11 @@ public class Grafo {
                         }
                     }
                 }
+                contIslas += 1;
+
             }
         }
-        return usuariosVisitados;
+        return contIslas;
 
     }
 
@@ -232,6 +240,4 @@ public class Grafo {
 //        }
 //        return numID;
 //    }
-
-
 }

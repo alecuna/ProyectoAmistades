@@ -22,7 +22,6 @@ public class Main {
      */
     public static void main(String[] args) {
         
-<<<<<<< HEAD
         User user1 = new User("Ale", 123);
         User user2 = new User("Ana", 234);
         User user3 = new User("Mari", 456);
@@ -48,9 +47,7 @@ public class Main {
         System.out.println("lista sin usuario ana");
         m.deleteVertex(user2);
         m.printVerts();
-        
-=======
-        
+                
         
         Grafo grafoFunctions = new Grafo();
         
@@ -86,8 +83,6 @@ public class Main {
 //        
 //        m.printVerts();
 //        
-
->>>>>>> c1ecdd9aeb49f6c30083dc32beb568182a93f9a1
     }
     
 }
