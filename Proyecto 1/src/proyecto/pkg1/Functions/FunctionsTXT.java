@@ -8,14 +8,21 @@ package proyecto.pkg1.Functions;
  *
  * @author Anabella Jaua
  */
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import proyecto.pkg1.Grafo.Grafo;
+import proyecto.pkg1.Grafo.ListaVertex;
+import proyecto.pkg1.Grafo.NodoVertex;
+import proyecto.pkg1.Grafo.User;
 
 public class FunctionsTXT {
     JFileChooser seleccionar = new JFileChooser();
@@ -126,19 +133,6 @@ public class FunctionsTXT {
         return relations;
     }
        
-//    public boolean validarUsers (String[] users, String usuario1, String usuario2, int id1, int id2){
-//        boolean value = true;
-//        for (int i = 0; i < users.length-1; i++) {
-//            String[] data = users[i].trim().split(",");
-//            String id = data[0];
-//            String username = data[1];
-//            if(Integer.parseInt(id) == id1){
-//                
-//                
-//            }
-//        }
-//        
-//    }
     
     /**
      * Funcion que permite reemplazar la informacion del TXT del sistema con la informacion subida por el usuario
@@ -148,7 +142,7 @@ public class FunctionsTXT {
         
         try{
             PrintWriter pw = new PrintWriter("test\\TxtProyecto.txt");
-            pw.append(contenido);
+            pw.write(contenido);
             
             pw.close();
             JOptionPane.showMessageDialog(null, "Guardado exitoso");
@@ -158,4 +152,19 @@ public class FunctionsTXT {
         }
     }
     
+    public void modificarUsuarioRelacion (int id1, int id2, String username1, String username2, int years){
+        
+        LeerArchivo read = new LeerArchivo();
+        String document = read.leertxt("test\\TxtProyecto.txt");
+        String[] info = document.split("Relaciones");
+        String users = info[0];
+
+        users += +id1+","+username1+"\n"+id2+","+username2;
+        String relaciones = info[1];
+        relaciones += id1+","+id2+","+years+"\n";
+        String agregar = users +"\n\nRelaciones"+ relaciones+"\n";
+
+        escribir_txt(agregar);
+        
+    }
 }

@@ -54,7 +54,7 @@ public class ListaVertex<T> {
         size++;
     }
 
-    public void insertLast(User element) {
+    public void insertFinal(User element) {
         NodoVertex<User> node = new NodoVertex(element);
 
         if (isEmpty()) {
@@ -67,47 +67,96 @@ public class ListaVertex<T> {
             getTail().setNext(node);
             node.setPrev(tail);
             setTail(node);
+            node.setNext(getHead());
+            
 
         }
         size++;
     }
-
-    public void deleteFirst() {
-
-        if (!isEmpty()) {
-            NodoVertex<User> pointer = getHead();
-            setHead(pointer.getNext());
-            pointer.setNext(null);
-            size--;
-
+    
+    
+    
+    public NodoVertex deleteBegin(){
+        if (isEmpty()) {
+            System.out.println("List is Empty");
         } else {
-            JOptionPane.showMessageDialog(null, "Error. Cannot delete node because the list is empty.");
-
+            NodoVertex pointer = getHead();
+            NodoVertex pointer2 = getHead();
+            setHead((NodoVertex) getHead().getNext());
+            while (pointer.getNext() != pointer2) {
+                pointer = (NodoVertex) pointer.getNext();
+            }
+            pointer.setNext(getHead());
+            pointer2.setNext(null);
+            size--;
+            return pointer;
         }
+        
+        return null;
     }
-
-    public void deleteLast() {
-
-        if (!isEmpty()) {
-            NodoVertex<User> pointer = getHead();
-
-            if (getSize() == 1) {
-                setHead(null);
-
-            } else {
-                while (pointer.getNext() != null && pointer.getNext().getNext() != null) {
+    
+    
+    
+    
+    public NodoVertex deleteFinal(){
+        if (isEmpty()) {
+            System.out.println("List is Empty");
+        } else {
+            NodoVertex pointer = getHead();
+            NodoVertex pointer2;
+            
+            if (size > 1){
+                while (((pointer.getNext())).getNext() != getHead()) {
                     pointer = pointer.getNext();
                 }
-                pointer.setNext(null);
-                setTail(pointer);
-                size--;
+                pointer2 = pointer.getNext();
+                pointer2.setNext(null);
+                pointer.setNext(getHead());
+            } else {
+                pointer2 = deleteBegin();
             }
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Error. Cannot delete node because the list is empty.");
+            size--;
+            return pointer2;
         }
+        
+        return null;
     }
-
+    
+    public NodoVertex deleteInIndex(int index){
+        if (isEmpty()) {
+            System.out.println("List is Empty");
+        } else {
+            if (index == 0){
+                deleteBegin();
+            } else {
+                if (index < size) {
+                    if(index == size - 1) {
+                        deleteFinal();
+                    } else {
+                        NodoVertex pointer = getHead();
+                        NodoVertex pointer2;
+                        int cont = 0;
+                        while ( cont< index-1 ) {
+                            pointer = (NodoVertex) pointer.getNext();
+                            cont++;
+                        }
+                        pointer2 = (NodoVertex) pointer.getNext();
+                        pointer.setNext((NodoVertex) pointer2.getNext());
+                        pointer2.setNext(null);
+                        return pointer2;
+                    }
+                    
+                } else {
+                    System.out.println("Error in index");
+                }
+            }
+        }
+        size--;
+        return null;
+    }
+    
+    
+    
     public void printList() {
         if (!isEmpty()) {
 
@@ -161,21 +210,21 @@ public class ListaVertex<T> {
 //
 //        while (pointer1 != null && pointer2 != null) {
 //            if ((int) pointer1.getElement() < (int) pointer2.getElement()) {
-//                merged.insertLast(pointer1.getElement());
+//                merged.insertFinal(pointer1.getElement());
 //                pointer1 = pointer1.getNext();
 //
 //            } else {
-//                merged.insertLast(pointer2.getElement());
+//                merged.insertFinal(pointer2.getElement());
 //                pointer2 = pointer2.getNext();
 //
 //            }
 //        }
 //        while (pointer1 != null) {
-//            merged.insertLast(pointer1.getElement());
+//            merged.insertFinal(pointer1.getElement());
 //            pointer1 = pointer1.getNext();
 //        }
 //        while (pointer2 != null) {
-//            merged.insertLast(pointer2.getElement());
+//            merged.insertFinal(pointer2.getElement());
 //            pointer2 = pointer2.getNext();
 //        }
 //

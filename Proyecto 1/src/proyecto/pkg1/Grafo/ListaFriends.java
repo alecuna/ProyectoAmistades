@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
  * @author alexandralecuna
  */
 public class ListaFriends {
-    
+
     private NodoFriends head;
     private NodoFriends tail;
     private int size;
@@ -22,44 +22,48 @@ public class ListaFriends {
         this.size = 0;
     }
 
-    
-     public boolean isEmpty(){
+    public boolean isEmpty() {
         return head == null;
     }
-    
+
     public void insertBegin(NodoFriends node) {
-        
-        if (isEmpty()){
+
+        if (isEmpty()) {
             node.setNext(node);
             node.setPrev(node);
             setHead(node);
             setTail(node);
-            
+
         } else {
             node.setNext(head);
             head.setPrev(node);
             setHead(node);
         }
-        size ++;
+        size++;
     }
+
     
-    public void insertLast(NodoFriends node){
-   
-        if (isEmpty()){
+    
+    public void insertLast(NodoFriends node) {
+
+        if (isEmpty()) {
             node.setNext(node);
             node.setPrev(node);
             setHead(node);
             setTail(node);
-            
+
         } else {
             getTail().setNext(node);
             node.setPrev(tail);
             setTail(node);
-            
+            node.setNext(getHead());
+
         }
-        size ++;
+        size++;
     }
     
+    
+
     public void deleteFirst() {
 
         if (!isEmpty()) {
@@ -74,49 +78,106 @@ public class ListaFriends {
         }
     }
     
-    public void deleteLast() {
+    
+
+    public NodoFriends deleteFinal() {
 
         if (!isEmpty()) {
             NodoFriends pointer = getHead();
-
             if (getSize() == 1) {
+                NodoFriends nodeReturn = getHead();
                 setHead(null);
-
+                size--;
+                return nodeReturn;
             } else {
-                while (pointer.getNext() != null && pointer.getNext().getNext() != null) {
+                while (pointer.getNext() != getHead() && pointer.getNext().getNext() != getHead()) {
                     pointer = pointer.getNext();
                 }
+                pointer.getNext().setPrev(null);
+                NodoFriends nodeReturn = pointer.getNext();
                 pointer.setNext(null);
                 setTail(pointer);
+                getHead().setPrev(getTail());
+                getTail().setNext(getHead());
                 size--;
+                return nodeReturn;
             }
-            
         } else {
             JOptionPane.showMessageDialog(null, "Error. Cannot delete node because the list is empty.");
         }
+        return null;
     }
+
+    public NodoFriends deleteInIndex(int index) {
+        if (!isEmpty()) {
+            NodoFriends pointer = getHead();
+            if (index > getSize()) {
+                System.out.println("The index is bigger than the size");
+                return deleteFinal();
+                
+            } else if (index == 0){
+                deleteFirst();
+                
+            } else {
+                if (index > getSize() / 2) {
+                    pointer = getTail();
+                    int cont = 0;
+                    while (cont <= (getSize() - index - 1) && pointer.getPrev() != getTail()) {
+                        pointer = pointer.getPrev();
+                        cont++;
+                    }
+                    NodoFriends temp = pointer.getNext();
+                    pointer.setNext(temp.getNext());
+                    temp.getNext().setPrev(pointer);
+                    temp.setNext(null);
+                    temp.setPrev(null);
+                    size--;
+                    return temp;
+
+                } else {
+                    pointer = getHead();
+                    int cont = 0;
+                    while (cont < (index - 1) && pointer.getNext() != getHead()) {
+                        pointer = pointer.getNext();
+                        cont++;
+                    }
+                    NodoFriends temp = pointer.getNext();
+                    pointer.setNext(temp.getNext());
+                    temp.getNext().setPrev(pointer);
+                    temp.setNext(null);
+                    temp.setPrev(null);
+                    size--;
+                    return temp;
+                }
+            }
+        }
+        return null;
+    }
+
+
     
-    public void printList(){
-        if (!isEmpty()){
-            
+    public void printList() {
+        if (!isEmpty()) {
+
             String aux = "[";
             for (int i = 0; i < getSize(); i++) {
-                User dato = getDato(i);
-                if (i == getSize() - 1){
+                String dato = getDato(i).getFriend().getUsername();
+                if (i == getSize() - 1) {
                     aux += dato + "]";
                 } else {
-                aux += dato + ",";
+                    aux += dato + ",";
                 }
             }
             System.out.println(aux);
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "The list is currently empty.");
         }
     }
+
     
     
-    public User getDato(int index) {
+    public NodoFriends getDato(int index) {
         if (isEmpty()) {
             return null;
 
@@ -127,10 +188,21 @@ public class ListaFriends {
                 pointer = pointer.getNext();
                 counter++;
             }
-            return pointer.getFriend();
+            return pointer;
         }
     }
-    
+
+    public boolean checkUser(User currentUser) {
+        boolean found = false;
+        for (int i = 0; i < getSize(); i++) {
+            if (getDato(i).getFriend().equals(currentUser)) {
+                found = true;
+                break;
+            }
+        }
+        return found;
+    }
+
     public NodoFriends getHead() {
         return head;
     }
@@ -154,5 +226,5 @@ public class ListaFriends {
     public void setSize(int size) {
         this.size = size;
     }
-    
+
 }
