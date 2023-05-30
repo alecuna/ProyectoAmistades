@@ -38,11 +38,11 @@ public class Grafo {
             for (int i = 0; i < userList.getSize(); i++) {
 
                 if (userList.getDato(i).getElement().equals(user1)) {
-                    userList.getDato(i).getFriendList().insertLast(friend2);
+                    userList.getDato(i).getFriendList().insertBegin(friend2);
                 }
 
                 if (userList.getDato(i).getElement().equals(user2)) {
-                    userList.getDato(i).getFriendList().insertLast(friend1);
+                    userList.getDato(i).getFriendList().insertBegin(friend1);
                 }
 
             }
