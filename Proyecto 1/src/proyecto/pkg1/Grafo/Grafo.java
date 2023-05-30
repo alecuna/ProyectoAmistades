@@ -226,6 +226,44 @@ public class Grafo {
 
     }
     
+    public ListaVertex<NodoVertex> getUserList() {
+        return userList;
+    }
+    
+    private ListaVertex deepTraveling(int numVertice, boolean[] visitados, ListaVertex usuariosVisitados) {
+        visitados[numVertice] = true;
+        usuariosVisitados.insertFinal(userList.getDato(numVertice).getElement());
+
+        for (int i = 0; i < V; i++) {
+            if ((numVertice != i) && (!visitados[i]) && (checkAdj(userList.getDato(numVertice).getElement(), userList.getDato(i).getElement()))) {
+                usuariosVisitados = deepTraveling(i, visitados, usuariosVisitados);
+            }
+        }
+        return usuariosVisitados;
+    }
+
+        
+    public int DFS() throws Exception {
+
+        int contIslas = 0;
+
+        boolean[] visitados = new boolean[V];
+        ListaVertex<User> usuariosVisitados = new ListaVertex<>();
+        
+       
+        for (int i = 0; i < V; i++) {
+            visitados[i] = false;
+        }
+        for (int i = 0; i < V; i++) {
+            if (!visitados[i]) {
+                usuariosVisitados = deepTraveling(i, visitados, usuariosVisitados);
+                contIslas ++;
+            } 
+        }
+        return contIslas;
+
+    }
+    
 //    public int getID(User usuario) {
 //        int numID = -1;
 //        if (userList.checkUser(usuario)) {

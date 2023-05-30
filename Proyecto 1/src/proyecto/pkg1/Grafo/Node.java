@@ -6,7 +6,7 @@ package proyecto.pkg1.Grafo;
 
 /**
  *
- * @author Angel Granado
+ * @author alexandralecuna
  * @param <T>
  */
 public class Node<T> {
