@@ -103,7 +103,7 @@ public class FunctionsGrafos {
                 }
 
         }}catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Error: Recuerde solo ingresar numeros enteros en los ids y en los años de amistad"+e);
+            JOptionPane.showMessageDialog(null, "Error: Recuerde solo ingresar numeros enteros en los ids y en los años de amistad");
             return false;
         } 
         return true;

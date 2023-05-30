@@ -23,6 +23,7 @@ import proyecto.pkg1.Grafo.Grafo;
 import proyecto.pkg1.Grafo.ListaVertex;
 import proyecto.pkg1.Grafo.NodoVertex;
 import proyecto.pkg1.Grafo.User;
+import static proyecto.pkg1.Main.grafo;
 
 public class FunctionsTXT {
     JFileChooser seleccionar = new JFileChooser();
@@ -165,6 +166,17 @@ public class FunctionsTXT {
         String agregar = users +"\n\nRelaciones"+ relaciones+"\n";
 
         escribir_txt(agregar);
+        
+    }
+    
+    public void eliminarUsuarios (Grafo grafo){
+        LeerArchivo read = new LeerArchivo();
+        String document = read.leertxt("test\\TxtProyecto.txt");
+        String[] info = document.split("Relaciones");
+        String users = info[0];
+        
+        
+        
         
     }
 }

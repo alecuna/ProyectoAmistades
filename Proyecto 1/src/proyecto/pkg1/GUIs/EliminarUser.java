@@ -3,23 +3,29 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package proyecto.pkg1.GUIs;
+import javax.swing.JOptionPane;
+import proyecto.pkg1.Grafo.ListaVertex;
+import proyecto.pkg1.Grafo.NodoVertex;
+import proyecto.pkg1.Grafo.User;
+import static proyecto.pkg1.Main.grafo;
 
 /**
  *
  * @author Anabella Jaua
  */
 public class EliminarUser extends javax.swing.JFrame {
-    String[] usuarios = AbrirGuardarTxt.usuarios;
-
-    public void setUsuarios(String[] usuarios) {
-        this.usuarios = usuarios;
-    }
+    ListaVertex listaUsers = grafo.getUserList();
+//    String[] usuarios = AbrirGuardarTxt.usuarios;
     
     /**
      * Creates new form EliminarUser
      */
     public EliminarUser() {
-        initComponents();
+        initComponents();   
+        for (NodoVertex pointer = listaUsers.getHead(); pointer != listaUsers.getTail(); pointer = pointer.getNext()) {
+           User usuario = (User) pointer.getElement();
+           SelectUser.addItem(usuario.getUsername());
+        }
     }
 
     /**
@@ -35,7 +41,7 @@ public class EliminarUser extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         SelectUser = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        deleteUser = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -47,7 +53,6 @@ public class EliminarUser extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 
-        SelectUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "usuarios" }));
         SelectUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SelectUserActionPerformed(evt);
@@ -57,7 +62,12 @@ public class EliminarUser extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Seleccione el usuario a eliminar:");
 
-        jButton2.setText("Eliminar");
+        deleteUser.setText("Eliminar");
+        deleteUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteUserActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Salir");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -82,16 +92,13 @@ public class EliminarUser extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 82, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton2)
+                            .addComponent(deleteUser)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(SelectUser, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(141, 141, 141))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton3)
-                                .addGap(47, 47, 47))))
+                            .addComponent(SelectUser, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3))
+                        .addGap(141, 141, 141))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -111,7 +118,7 @@ public class EliminarUser extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(deleteUser)
                     .addComponent(jButton3))
                 .addGap(33, 33, 33)
                 .addComponent(jLabel3)
@@ -138,7 +145,27 @@ public class EliminarUser extends javax.swing.JFrame {
 
     private void SelectUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectUserActionPerformed
         // TODO add your handling code here:
+        
+        
     }//GEN-LAST:event_SelectUserActionPerformed
+
+    private void deleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserActionPerformed
+        // TODO add your handling code here:
+        Object selected = SelectUser.getSelectedItem();
+        String usuario = selected.toString();
+        JOptionPane.showMessageDialog(null, "Usuario "+ usuario+ " eliminado");
+        User deleted = null;
+        User compare = null;
+        NodoVertex pointer = listaUsers.getHead();
+        while (deleted == null){
+            compare = (User) pointer.getElement();
+            if (compare.getUsername().equals(usuario)){
+                deleted = compare;
+            }
+            pointer = pointer.getNext();
+        } grafo.deleteVertex(compare);
+        
+    }//GEN-LAST:event_deleteUserActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,8 +204,8 @@ public class EliminarUser extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JComboBox<String> SelectUser;
+    private javax.swing.JButton deleteUser;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
