@@ -264,6 +264,47 @@ public class Grafo {
 
     }
     
+    public boolean checkPuente(User user1, User user2) throws Exception {
+
+        boolean isPuente = false;
+        int years = -1;
+
+        // obtiene el peso de la arista para volverla agregar al grafo al finalizar la funcion
+        if (userList.checkUser(user1) && userList.checkUser(user2) && checkAdj(user1, user2)) {
+            
+            for (int i = 0; i < userList.getSize(); i++) {
+                User currentUser = userList.getDato(i).getElement();
+                if (currentUser == user1) {
+                    for (int j = 0; j < userList.getDato(i).getFriendList().getSize(); j++) {
+                        NodoFriends pointer = userList.getDato(i).getFriendList().getDato(j);
+                        if (pointer.getFriend() == user2) {
+                            years = userList.getDato(i).getFriendList().getDato(j).getWeight();
+                            break;
+                        }
+                    } break;
+                }
+            }
+
+            int cantPuentes = BFS();
+            deleteEdge(user1, user2);
+            int cantNuevaPuentes = BFS();
+            
+            System.out.println("UserA: " + user1.getUsername() + " UserB: " + user2.getUsername() + " years: "+ years);
+            addEdge(user1, user2, years);
+            
+            
+            System.out.println(cantPuentes + "=" + cantNuevaPuentes);
+            
+            if (cantPuentes != cantNuevaPuentes) {
+                isPuente = true;
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Error. Alguno de los usuarios ingresados no existe.");
+        }
+        return isPuente;
+    }
+    
 //    public int getID(User usuario) {
 //        int numID = -1;
 //        if (userList.checkUser(usuario)) {
