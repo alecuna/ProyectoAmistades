@@ -65,11 +65,11 @@ public class Grafo {
                     if (userList.getDato(i).getFriendList().getDato(j).getFriend() == usuario) {
                         userList.getDato(i).getFriendList().deleteInIndex(j);
                         A--;
-                        
+
                     }
-                    
+
                     // elimina el usuario de la lista de usuarios vertex
-                    if (userList.getDato(i).getElement() == usuario){
+                    if (userList.getDato(i).getElement() == usuario) {
                         userList.deleteInIndex(i);
                     }
                 }
@@ -93,7 +93,7 @@ public class Grafo {
 
                         if (pointer.getFriend() == user2) {
                             userList.getDato(i).getFriendList().deleteInIndex(j);
-                            
+
                             break;
 
                         } else {
@@ -116,10 +116,24 @@ public class Grafo {
 
                     }
                 }
-            } A--;
+            }
+            A--;
         } else {
             JOptionPane.showMessageDialog(null, "Error. Alguno de los usuarios ingresados no existe.");
         }
+    }
+
+    public boolean checkAdj(User user1, User user2) {
+        boolean adj = false;
+        for (int i = 0; i < userList.getSize(); i++) {
+            for (int j = 0; j < userList.getDato(i).getFriendList().getSize(); j++) {
+                User currentUser = userList.getDato(i).getFriendList().getDato(j).getFriend();
+                if (currentUser == user1) {
+                    adj = true;
+                }
+            }
+        }
+        return adj;
     }
 
     public void printVerts() {
@@ -154,15 +168,70 @@ public class Grafo {
 
     }
 
-//    public void printFriendsAle(){
-//        System.out.println(userList.getDato(1).getElement().getUsername() + "-->");
-//        for (int j = 0; j < userList.getDato(1).getFriendList().getSize(); j++) {
-//                System.out.println(j + ". " + userList.getDato(1).getFriendList().getDato(j).getFriend().getUsername());
+    public int getIndex(User usuario) {
+        if (!(userList.isEmpty())) {
+            int index = 0;
+            NodoVertex aux = userList.getHead();
+            while (aux != null) {
+                if (aux.getElement() == (usuario)) {
+                    break;
+                }
+                aux = aux.getNext();
+                index++;
+            }
+            return index;
+        }
+        return -1;
+    }
+
+    public ListaVertex BFS() throws Exception {
+
+        Queue<User> cola = new Queue<>();
+        ListaVertex<User> usuariosVisitados = new ListaVertex<>();
+        boolean visitados[] = new boolean[V];
+        User currentUser;
+
+        for (int i = 0; i < V; i++) {
+            visitados[i] = false;
+        }
+        for (int i = 0; i < V; i++) {
+
+            if (!visitados[i]) {
+                cola.enqueue(userList.getDato(i).getElement());
+                visitados[i] = true;
+
+                while (!cola.isEmpty()) {
+                    currentUser = cola.dequeue();
+                    usuariosVisitados.insertFinal(currentUser);
+                    int numAux = getIndex(currentUser);
+
+                    for (int j = 0; j < V; j++) {
+                        if ((numAux != j) && (checkAdj(currentUser, userList.getDato(j).getElement())) && (!visitados[j])) {
+                            cola.enqueue(userList.getDato(j).getElement());
+                            visitados[j] = true;
+                        }
+                    }
+                }
+            }
+        }
+        return usuariosVisitados;
+
+    }
+
+//    public int getID(User usuario) {
+//        int numID = -1;
+//        if (userList.checkUser(usuario)) {
+//            for (int i = 0; i < userList.getSize(); i++) {
+//                if (userList.getDato(i).getElement() == usuario) {
+//                    numID = userList.getDato(i).getElement().getUserID();
+//                }
 //            }
-//    }
 //
-//    public void pruebaDelete() {
-//        userList.getDato(1).getFriendList().deleteInIndex(0);
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Error. El usuario ingresado no existe.");
 //        }
-//    
+//        return numID;
+//    }
+
+
 }
