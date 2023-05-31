@@ -17,8 +17,11 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import proyecto.pkg1.Functions.FunctionsGrafos;
 import proyecto.pkg1.Functions.FunctionsTXT;
 import proyecto.pkg1.Functions.LeerArchivo;
+import proyecto.pkg1.Grafo.Grafo;
+import static proyecto.pkg1.Main.grafo;
 
 /**
  *
@@ -29,8 +32,8 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
     File archivo; 
     FileInputStream entrada; 
     FileOutputStream salida;
-    public static String[] usuarios;
-    public static String[] relaciones;
+    public String[] usuarios;
+    public String[] relaciones;
     private String contenidoFile;
   
 //    /**
@@ -50,6 +53,8 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
 
     FunctionsTXT f = new FunctionsTXT();
     LeerArchivo content = new LeerArchivo();
+    FunctionsGrafos fGraph = new FunctionsGrafos();
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -231,6 +236,8 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
             f.escribir_txt(contenidoFile);
             usuarios = f.getUsuarios(contenidoFile);
             relaciones = f.getRelaciones(contenidoFile);
+            JOptionPane.showMessageDialog(null, "Guardado exitoso");
+            grafo = fGraph.crearGrafo(usuarios, relaciones);
             this.dispose();
         }
         else{

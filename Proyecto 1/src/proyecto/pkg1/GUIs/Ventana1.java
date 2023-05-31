@@ -35,12 +35,13 @@ public class Ventana1 extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        ingresar = new javax.swing.JButton();
         ShowGraph = new javax.swing.JButton();
         ShowIslas = new javax.swing.JButton();
         ShowPuentes = new javax.swing.JButton();
         addUser = new javax.swing.JButton();
+        ingresar = new javax.swing.JButton();
         deleteUser = new javax.swing.JButton();
+        relacion = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -51,19 +52,6 @@ public class Ventana1 extends javax.swing.JFrame {
         jLabel1.setText("Bienvenido!");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, 177, 62));
 
-        ingresar.setText("Ingresar archivo");
-        ingresar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ingresarMouseClicked(evt);
-            }
-        });
-        ingresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ingresarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 180, 30));
-
         ShowGraph.setText("Ver grafo");
         ShowGraph.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,6 +61,11 @@ public class Ventana1 extends javax.swing.JFrame {
         getContentPane().add(ShowGraph, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 180, 30));
 
         ShowIslas.setText("Ver cantidad de islas");
+        ShowIslas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ShowIslasActionPerformed(evt);
+            }
+        });
         getContentPane().add(ShowIslas, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, 180, 30));
 
         ShowPuentes.setText("Identificar puentes");
@@ -91,6 +84,19 @@ public class Ventana1 extends javax.swing.JFrame {
         });
         getContentPane().add(addUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 180, 30));
 
+        ingresar.setText("Ingresar archivo");
+        ingresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ingresarMouseClicked(evt);
+            }
+        });
+        ingresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ingresarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 180, 30));
+
         deleteUser.setText("Eliminar usuario");
         deleteUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,6 +104,14 @@ public class Ventana1 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(deleteUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, 180, 30));
+
+        relacion.setText(" relacion");
+        relacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                relacionActionPerformed(evt);
+            }
+        });
+        getContentPane().add(relacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 260, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/pkg1/GUIs/Images/Background.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
@@ -145,6 +159,9 @@ public class Ventana1 extends javax.swing.JFrame {
 
     private void ShowPuentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowPuentesActionPerformed
         // TODO add your handling code here:
+        Puentes bridges = new Puentes();
+        bridges.setVisible(true);
+        bridges.setLocationRelativeTo(null);
     }//GEN-LAST:event_ShowPuentesActionPerformed
 
     private void addUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserActionPerformed
@@ -159,6 +176,20 @@ public class Ventana1 extends javax.swing.JFrame {
         delete.setVisible(true);
         delete.setLocationRelativeTo(null);
     }//GEN-LAST:event_deleteUserActionPerformed
+
+    private void ShowIslasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowIslasActionPerformed
+        // TODO add your handling code here:
+        VerRecorridos islas = new VerRecorridos();
+        islas.setVisible(true);
+        islas.setLocationRelativeTo(null);
+    }//GEN-LAST:event_ShowIslasActionPerformed
+
+    private void relacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relacionActionPerformed
+        // TODO add your handling code here:
+        AgregarRelacion relations = new AgregarRelacion();
+        relations.setVisible(true);
+        
+    }//GEN-LAST:event_relacionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,5 +235,6 @@ public class Ventana1 extends javax.swing.JFrame {
     private javax.swing.JButton ingresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton relacion;
     // End of variables declaration//GEN-END:variables
 }

@@ -31,7 +31,7 @@ public class Main {
         String[] relaciones = use.getRelaciones(infoGrafo);
         FunctionsGrafos grafoFunctions = new FunctionsGrafos();
         grafo = grafoFunctions.crearGrafo(users, relaciones);
-//        grafo.printFriends();
+//        grafo.printVerts();
        
       
         Ventana1 window = new Ventana1();

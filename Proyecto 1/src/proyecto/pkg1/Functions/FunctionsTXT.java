@@ -146,7 +146,7 @@ public class FunctionsTXT {
             pw.write(contenido);
             
             pw.close();
-            JOptionPane.showMessageDialog(null, "Guardado exitoso");
+//            JOptionPane.showMessageDialog(null, "Guardado exitoso");
             
         }catch(Exception err){
             JOptionPane.showMessageDialog(null, err);
@@ -169,13 +169,29 @@ public class FunctionsTXT {
         
     }
     
-    public void eliminarUsuarios (Grafo grafo){
+    public void eliminarUsuariosTxt (User usuario){
         LeerArchivo read = new LeerArchivo();
         String document = read.leertxt("test\\TxtProyecto.txt");
-        String[] info = document.split("Relaciones");
-        String users = info[0];
-        
-        
+        String[] separar = document.split("Relaciones");
+        String usuarios = separar [0];
+        String[] users = usuarios.split("\n");
+        String[] separando = document.split("Relaciones");
+        String relaciones = separando[1];
+        String[] relations = relaciones.split("\n");
+        String usuariosFinal = "Usuarios\n";
+        String relacionesFinal = "Relaciones\n";
+        for (int i = 1; i < users.length; i++) {
+            String[] usernames = users[i].split(",");
+            if (!usernames[1].trim().equals(usuario.getUsername())){
+                usuariosFinal += users[i]+"\n";
+            }
+        }for (int i = 1; i < relations.length; i++) {
+            String[] ids = relations[i].trim().split(",");
+            if (Integer.parseInt(ids[0].trim()) != usuario.getUserID() && Integer.parseInt(ids[1].trim())!= usuario.getUserID()){
+                relacionesFinal += relations[i]+"\n";
+        }}
+        String agregar = usuariosFinal + relacionesFinal;
+        escribir_txt(agregar);
         
         
     }

@@ -23,11 +23,6 @@ public class Grafo {
         this.userList = new ListaVertex<NodoVertex>();
     }
 
-    public ListaVertex<NodoVertex> getUserList() {
-        return userList;
-    }
-    
-    
     public void addVertex(User currentUser) {
         userList.insertFinal(currentUser);
         V++;
@@ -43,11 +38,11 @@ public class Grafo {
             for (int i = 0; i < userList.getSize(); i++) {
 
                 if (userList.getDato(i).getElement().equals(user1)) {
-                    userList.getDato(i).getFriendList().insertLast(friend2);
+                    userList.getDato(i).getFriendList().insertBegin(friend2);
                 }
 
                 if (userList.getDato(i).getElement().equals(user2)) {
-                    userList.getDato(i).getFriendList().insertLast(friend1);
+                    userList.getDato(i).getFriendList().insertBegin(friend1);
                 }
 
             }
@@ -70,11 +65,11 @@ public class Grafo {
                     if (userList.getDato(i).getFriendList().getDato(j).getFriend() == usuario) {
                         userList.getDato(i).getFriendList().deleteInIndex(j);
                         A--;
-                        
+
                     }
-                    
+
                     // elimina el usuario de la lista de usuarios vertex
-                    if (userList.getDato(i).getElement() == usuario){
+                    if (userList.getDato(i).getElement() == usuario) {
                         userList.deleteInIndex(i);
                     }
                 }
@@ -98,7 +93,7 @@ public class Grafo {
 
                         if (pointer.getFriend() == user2) {
                             userList.getDato(i).getFriendList().deleteInIndex(j);
-                            
+
                             break;
 
                         } else {
@@ -121,10 +116,28 @@ public class Grafo {
 
                     }
                 }
-            } A--;
+            }
+            A--;
         } else {
             JOptionPane.showMessageDialog(null, "Error. Alguno de los usuarios ingresados no existe.");
         }
+    }
+
+    public boolean checkAdj(User user1, User user2) {
+        boolean adj = false;
+        for (int i = 0; i < userList.getSize(); i++) {
+            User currentUser = userList.getDato(i).getElement();
+            if (currentUser == user1) {
+                for (int j = 0; j < userList.getDato(i).getFriendList().getSize(); j++) {
+
+                    if (userList.getDato(i).getFriendList().getDato(j).getFriend() == user2) {
+                        adj = true;
+                    }
+                }
+
+            }
+        }
+        return adj;
     }
 
     public void printVerts() {
@@ -159,15 +172,136 @@ public class Grafo {
 
     }
 
-//    public void printFriendsAle(){
-//        System.out.println(userList.getDato(1).getElement().getUsername() + "-->");
-//        for (int j = 0; j < userList.getDato(1).getFriendList().getSize(); j++) {
-//                System.out.println(j + ". " + userList.getDato(1).getFriendList().getDato(j).getFriend().getUsername());
-//            }
-//    }
-//
-//    public void pruebaDelete() {
-//        userList.getDato(1).getFriendList().deleteInIndex(0);
-//        }
-//    
+    public int getIndex(User usuario) {
+        if (!(userList.isEmpty())) {
+            int index = 0;
+            NodoVertex aux = userList.getHead();
+            while (aux != null) {
+                if (aux.getElement() == (usuario)) {
+                    break;
+                }
+                aux = aux.getNext();
+                index++;
+            }
+            return index;
+        }
+        return -1;
+    }
+
+    public int BFS() throws Exception {
+
+        Queue<User> cola = new Queue<>();
+        ListaVertex<User> usuariosVisitados = new ListaVertex<>();
+        boolean visitados[] = new boolean[V];
+        User currentUser;
+        int contIslas = 0;
+
+        for (int i = 0; i < V; i++) {
+            visitados[i] = false;
+        }
+
+        for (int i = 0; i < V; i++) {
+
+            if (!visitados[i]) {
+                cola.enqueue(userList.getDato(i).getElement());
+                visitados[i] = true;
+
+                while (!cola.isEmpty()) {
+                    currentUser = cola.dequeue();
+                    usuariosVisitados.insertFinal(currentUser);
+                    int numAux = getIndex(currentUser);
+
+                    for (int j = 0; j < V; j++) {
+                        if ((numAux != j) && (checkAdj(currentUser, userList.getDato(j).getElement())) && (!visitados[j])) {
+                            cola.enqueue(userList.getDato(j).getElement());
+                            visitados[j] = true;
+                        }
+                    }
+                }
+                contIslas += 1;
+
+            }
+        }
+        return contIslas;
+
+    }
+    
+    public ListaVertex<NodoVertex> getUserList() {
+        return userList;
+    }
+    
+    private ListaVertex deepTraveling(int numVertice, boolean[] visitados, ListaVertex usuariosVisitados) {
+        visitados[numVertice] = true;
+        usuariosVisitados.insertFinal(userList.getDato(numVertice).getElement());
+
+        for (int i = 0; i < V; i++) {
+            if ((numVertice != i) && (!visitados[i]) && (checkAdj(userList.getDato(numVertice).getElement(), userList.getDato(i).getElement()))) {
+                usuariosVisitados = deepTraveling(i, visitados, usuariosVisitados);
+            }
+        }
+        return usuariosVisitados;
+    }
+
+        
+    public int DFS() throws Exception {
+
+        int contIslas = 0;
+
+        boolean[] visitados = new boolean[V];
+        ListaVertex<User> usuariosVisitados = new ListaVertex<>();
+        
+       
+        for (int i = 0; i < V; i++) {
+            visitados[i] = false;
+        }
+        for (int i = 0; i < V; i++) {
+            if (!visitados[i]) {
+                usuariosVisitados = deepTraveling(i, visitados, usuariosVisitados);
+                contIslas ++;
+            } 
+        }
+        return contIslas;
+
+    }
+    
+    public boolean checkPuente(User user1, User user2) throws Exception {
+
+        boolean isPuente = false;
+        int years = -1;
+
+        // obtiene el peso de la arista para volverla agregar al grafo al finalizar la funcion
+        if (userList.checkUser(user1) && userList.checkUser(user2)) {
+            
+            for (int i = 0; i < userList.getSize(); i++) {
+                User currentUser = userList.getDato(i).getElement();
+                if (currentUser == user1) {
+                    for (int j = 0; j < userList.getDato(i).getFriendList().getSize(); j++) {
+                        NodoFriends pointer = userList.getDato(i).getFriendList().getDato(j);
+                        if (pointer.getFriend() == user2) {
+                            years = userList.getDato(i).getFriendList().getDato(j).getWeight();
+                            break;
+                        }
+                    } break;
+                }
+            }
+
+            int cantPuentes = BFS();
+            deleteEdge(user1, user2);
+            int cantNuevaPuentes = BFS();
+            
+            System.out.println("UserA: " + user1.getUsername() + " UserB: " + user2.getUsername() + " years: "+ years);
+            addEdge(user1, user2, years);
+            
+            
+            System.out.println(cantPuentes + "=" + cantNuevaPuentes);
+            
+            if (cantPuentes != cantNuevaPuentes) {
+                isPuente = true;
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Error. Alguno de los usuarios ingresados no existe.");
+        }
+        return isPuente;
+    }
 }
