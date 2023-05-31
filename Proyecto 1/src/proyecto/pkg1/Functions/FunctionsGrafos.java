@@ -110,5 +110,35 @@ public class FunctionsGrafos {
         
     
         }
+    
+    public boolean validarAddUser (Grafo grafo,String idUser1, String username1){
+        try{
+            if (username1.charAt(0)!='@'){
+                    JOptionPane.showMessageDialog(null, "Error: Recuerde colocar @ antes de los usernames de los usuarios");
+                    return false;
+            }
+            int id1 = Integer.parseInt(idUser1);
+
+            ListaVertex listaUsers = grafo.getUserList();
+            for (NodoVertex pointer = listaUsers.getHead(); pointer != listaUsers.getTail(); pointer = pointer.getNext()) {
+                User usuarioComparar =(User) pointer.getElement();
+                String usernameComparar = usuarioComparar.getUsername();
+                int idComparar = usuarioComparar.getUserID();
+                if( idComparar == id1 ){
+                    JOptionPane.showMessageDialog(null, "Ya existe un usuario registrado con el id "+id1+"\nIngrese unicamente usuarios nuevos por favor.");
+                    return false;
+                } else if( usernameComparar.trim().equalsIgnoreCase(username1)){
+                    JOptionPane.showMessageDialog(null, "Ya existe un usuario registrado con el username "+username1+"\nIngrese unicamente usuarios nuevos por favor.");
+                    return false;
+                }
+
+        }}catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error: Recuerde solo ingresar numeros enteros en los ids y en los años de amistad");
+            return false;
+        } 
+        return true;
+        
+    
+        }
            
 }

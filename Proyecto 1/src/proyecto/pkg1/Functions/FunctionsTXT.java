@@ -169,6 +169,33 @@ public class FunctionsTXT {
         
     }
     
+    public void agregarRelacion(int id1, int id2, int years){
+        LeerArchivo read = new LeerArchivo();
+        String document = read.leertxt("test\\TxtProyecto.txt");
+        String[] info = document.split("Relaciones");
+        String users = info[0];
+
+        
+        String relaciones = info[1];
+        String[] relations = relaciones.split("\n");
+        String relacionesFinal ="";
+        String agregar = users +"\n\nRelaciones\n";
+//        for (int i = 1; i < relations.length; i++) {
+//            String[] ids = relations[i].trim().split(",");
+//            if ((Integer.parseInt(ids[0].trim()) != id1 || Integer.parseInt(ids[1].trim())!= id2) && (Integer.parseInt(ids[0].trim()) != id2 || Integer.parseInt(ids[1].trim())!= id1)){
+//                relacionesFinal += relations[i]+"\n";
+//            }else{
+//                relacionesFinal += String.valueOf(id1) +"," + String.valueOf(id2)+","+String.valueOf(years)+"\n";
+//            }}
+        for (int i = 1; i < relations.length; i++) {
+            String[] ids = relations[i].trim().split(",");
+                relacionesFinal += relations[i]+"\n";
+//                relacionesFinal += String.valueOf(id1) +"," + String.valueOf(id2)+","+String.valueOf(years)+"\n";
+            }
+        agregar += relacionesFinal + String.valueOf(id1) +"," + String.valueOf(id2)+","+String.valueOf(years);
+        escribir_txt(agregar);
+    }
+    
     public void eliminarUsuariosTxt (User usuario){
         LeerArchivo read = new LeerArchivo();
         String document = read.leertxt("test\\TxtProyecto.txt");
@@ -194,5 +221,18 @@ public class FunctionsTXT {
         escribir_txt(agregar);
         
         
+    }
+    
+    public void agregarUser (String username, int id){
+        LeerArchivo read = new LeerArchivo();
+        String document = read.leertxt("test\\TxtProyecto.txt");
+        String[] info = document.split("Relaciones");
+        String users = info[0];
+        String relations = info[1];
+        users += +id+","+username+"\n";
+
+        String agregar = users +"\n\nRelaciones"+relations;
+
+        escribir_txt(agregar);
     }
 }
