@@ -71,6 +71,7 @@ public class FunctionsTXT {
      * @return boolean true si el archivo es valido
      */
     public boolean validarTxt(String contenido){
+        try{
          if (!contenido.contains("Usuarios") || !contenido.contains("Relaciones")){
              return false;
          } else{
@@ -102,11 +103,13 @@ public class FunctionsTXT {
                     Integer.parseInt(amistad[2].trim());
                  } catch(Exception e){
                      return false;
-                 }
+                 }}
+         }
         
-             } return true;
-            
-         } 
+             }catch(Exception e){
+                 return false;
+             }return true;
+          
           
        }
     

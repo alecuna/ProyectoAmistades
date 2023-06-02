@@ -192,6 +192,7 @@ public class AgregarRelacion extends javax.swing.JFrame {
                 grafo.addEdge(first, second, year);
                 JOptionPane.showMessageDialog(null, "Relacion agregada exitosamente!");            
                 txt.agregarRelacion(first.getUserID(), second.getUserID(), year);
+                years.setText("");
             } catch (Exception e){
                 JOptionPane.showMessageDialog(null, "Por favor ingrese unicamente numeros enteros en la casilla de años de amistad");            
             }

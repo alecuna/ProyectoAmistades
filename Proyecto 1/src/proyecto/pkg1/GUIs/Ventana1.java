@@ -11,6 +11,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import org.graphstream.graph.Graph;
+import proyecto.pkg1.Functions.FunctionsGrafos;
+import static proyecto.pkg1.Main.grafo;
 
 /**
  *
@@ -24,7 +27,7 @@ public class Ventana1 extends javax.swing.JFrame {
     public Ventana1() {
         initComponents();
     }
-
+    FunctionsGrafos funcionesGrafo = new FunctionsGrafos();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,7 +47,6 @@ public class Ventana1 extends javax.swing.JFrame {
         relacion = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -124,10 +126,7 @@ public class Ventana1 extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/pkg1/GUIs/Images/Background.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-140, -100, 820, 610));
-
-        jLabel7.setText("jLabel7");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 250, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-210, -90, 890, 610));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -167,6 +166,9 @@ public class Ventana1 extends javax.swing.JFrame {
 
     private void ShowGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowGraphActionPerformed
         // TODO add your handling code here:
+        Graph dibujoGrafo = funcionesGrafo.drawGraph(grafo);
+        funcionesGrafo.viewGraph(dibujoGrafo);
+        
     }//GEN-LAST:event_ShowGraphActionPerformed
 
     private void ShowPuentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowPuentesActionPerformed
@@ -250,7 +252,6 @@ public class Ventana1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JButton relacion;
     // End of variables declaration//GEN-END:variables
 }

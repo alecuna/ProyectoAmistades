@@ -160,7 +160,7 @@ public class AddUser extends javax.swing.JFrame {
             User user1 = new User(usuario1, iduser1);
             grafo.addVertex(user1);
             txt.agregarUser(usuario1, iduser1);
-            JOptionPane.showMessageDialog(null, "Usuarios agregados");}
+            JOptionPane.showMessageDialog(null, "Usuario agregado con exito!");}
         id1.setText("");
         user1.setText("");
         

@@ -32,6 +32,7 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
     File archivo; 
     FileInputStream entrada; 
     FileOutputStream salida;
+    boolean guardar = false;
     public String[] usuarios;
     public String[] relaciones;
     private String contenidoFile;
@@ -231,6 +232,7 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
 //        } catch (Exception e){
 //        Logger.getLogger(AbrirGuardarTxt.class.getName()).log(Level.SEVERE, null, e);
 //        } 
+        if (guardar){
         int response = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea guardar los nuevos datos? Se reemplazara la base de datos existente en el sistema");
         if (response == JOptionPane.YES_OPTION) {
             f.escribir_txt(contenidoFile);
@@ -242,7 +244,9 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
         }
         else{
             JOptionPane.showMessageDialog(null, "No se han guardado los datos");
-        }    
+        }} else{
+            JOptionPane.showMessageDialog(null, "Por favor ingrese un archivo con la estructura requerida\npara actualizar la base de datos del sistema");
+        }   
 
         
        
@@ -255,12 +259,15 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
             if (archivo.canRead()){
                 if (archivo.getName().endsWith("txt")){
                     String documento = f.AbrirArchivo(archivo);
-                    texto.setText(documento);
+                    
                     String path = archivo.getAbsolutePath();
                     contenidoFile = content.leertxt(path);
                     if (!f.validarTxt(contenidoFile)){
                         JOptionPane.showMessageDialog(null, "El contenido del archivo no cumple con la estructura requerida\nPor favor intentelo de nuevo");
-                    } 
+                    } else{
+                        guardar = true;
+                        texto.setText(documento);
+                    }
                 }else{
                     JOptionPane.showMessageDialog(null, "Archivo No Compatible");
                 }
