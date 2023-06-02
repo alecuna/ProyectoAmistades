@@ -4,6 +4,7 @@
  */
 package proyecto.pkg1.GUIs;
 import javax.swing.JOptionPane;
+import proyecto.pkg1.Functions.FunctionsGrafos;
 import proyecto.pkg1.Functions.FunctionsTXT;
 import proyecto.pkg1.Grafo.ListaVertex;
 import proyecto.pkg1.Grafo.NodoVertex;
@@ -31,6 +32,7 @@ public class EliminarUser extends javax.swing.JFrame {
         SelectUser.addItem(last.getUsername());
     }
     FunctionsTXT txt = new FunctionsTXT();
+    FunctionsGrafos grafosF = new FunctionsGrafos();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -166,9 +168,12 @@ public class EliminarUser extends javax.swing.JFrame {
                 deleted = compare;
             }
             pointer = pointer.getNext();
-        } grafo.deleteVertex(compare);
+        } 
+        grafo.deleteVertex(compare);
+
         txt.eliminarUsuariosTxt(compare);
         SelectUser.removeItem(selected);
+        
     }//GEN-LAST:event_deleteUserActionPerformed
 
     /**

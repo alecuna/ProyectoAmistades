@@ -22,12 +22,22 @@ public class Grafo {
         this.A = 0;
         this.userList = new ListaVertex<NodoVertex>();
     }
-
+    
+/**
+ * Funcion que agrega un usuario al grafo
+ * @param currentUser, usuario a añadir
+ */
     public void addVertex(User currentUser) {
         userList.insertFinal(currentUser);
         V++;
     }
 
+/**
+ * Funcion que añade una relacion entre dos usuarios, cuyo peso son los años
+ * @param user1, primer usuario de la relacion
+ * @param user2, segundo usuario de la relacion
+ * @param years, años de amistas entre el usuario 1 y 2
+ */
     public void addEdge(User user1, User user2, int years) {
         NodoFriends friend1 = new NodoFriends(years, user1);
         NodoFriends friend2 = new NodoFriends(years, user2);
@@ -54,6 +64,10 @@ public class Grafo {
 
     }
 
+/**
+ * Funcion que elimina usuarios del grafo
+ * @param usuario, usuario a eliminar
+ */
     public void deleteVertex(User usuario) {
         if (userList.checkUser(usuario)) {
 
@@ -73,8 +87,9 @@ public class Grafo {
                         userList.deleteInIndex(i);
                     }
                 }
-            }
+            } 
             V--;
+            userList.setSize(V);
 
         } else {
             JOptionPane.showMessageDialog(null, "Error. El usuario que desea eliminar no existe.");

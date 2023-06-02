@@ -168,7 +168,7 @@ public class Ventana1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         Graph dibujoGrafo = funcionesGrafo.drawGraph(grafo);
         funcionesGrafo.viewGraph(dibujoGrafo);
-        
+        dibujoGrafo = null;
     }//GEN-LAST:event_ShowGraphActionPerformed
 
     private void ShowPuentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowPuentesActionPerformed
