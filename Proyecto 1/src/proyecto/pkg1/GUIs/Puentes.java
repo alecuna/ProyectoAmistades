@@ -11,7 +11,7 @@ import proyecto.pkg1.Grafo.User;
 import static proyecto.pkg1.Main.grafo;
 
 /**
- *
+ * Interfaz grafica (JFrame) que permite evaluar si la relacion entre dos usuarios crea un puente en el grafo
  * @author Anabella Jaua
  */
 public class Puentes extends javax.swing.JFrame {
@@ -22,6 +22,7 @@ public class Puentes extends javax.swing.JFrame {
      */
     public Puentes() {
         initComponents();
+        // Se agregan los usuarios guardados en el grafo como items a los 2 combo box de la interfaz
         for (NodoVertex pointer = listaUsers.getHead(); pointer != listaUsers.getTail(); pointer = pointer.getNext()) {
            User usuario = (User) pointer.getElement();
            user1.addItem(usuario.getUsername());
@@ -48,7 +49,7 @@ public class Puentes extends javax.swing.JFrame {
         salir = new javax.swing.JButton();
         user2 = new javax.swing.JComboBox<>();
         user1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        verPuente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -70,10 +71,10 @@ public class Puentes extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Evaluar relacion");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        verPuente.setText("Evaluar relacion");
+        verPuente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                verPuenteActionPerformed(evt);
             }
         });
 
@@ -100,7 +101,7 @@ public class Puentes extends javax.swing.JFrame {
                         .addComponent(salir))
                     .addGroup(jPanelPuenteLayout.createSequentialGroup()
                         .addGap(189, 189, 189)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(verPuente, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
         jPanelPuenteLayout.setVerticalGroup(
@@ -114,7 +115,7 @@ public class Puentes extends javax.swing.JFrame {
                     .addComponent(user2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(user1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(verPuente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
                 .addComponent(salir)
                 .addGap(42, 42, 42))
@@ -149,13 +150,21 @@ public class Puentes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Metodo que define la accion realizada al tocar el boton de "Salir"
+     * @param evt, evento llevado a cabo por el usuario
+     */
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
-        // TODO add your handling code here:
+        // Se cierra la ventana
         this.dispose();
     }//GEN-LAST:event_salirActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    /**
+     * Metodo que define la accion realizada al tocar el boton de "Evaluar relacion"
+     * @param evt, evento llevado a cabo por el usuario
+     */
+    private void verPuenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verPuenteActionPerformed
+        // Se obtienen los 2 usuarios seleccionados y se verifica si su relacion crea o no un puente 
         Object selected1 = user1.getSelectedItem();
         Object selected2 = user2.getSelectedItem();
         String usuario1 = selected1.toString();
@@ -194,7 +203,7 @@ public class Puentes extends javax.swing.JFrame {
         } catch(Exception e){
             
         }}
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_verPuenteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -232,7 +241,6 @@ public class Puentes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
@@ -240,5 +248,6 @@ public class Puentes extends javax.swing.JFrame {
     private javax.swing.JButton salir;
     private javax.swing.JComboBox<String> user1;
     private javax.swing.JComboBox<String> user2;
+    private javax.swing.JButton verPuente;
     // End of variables declaration//GEN-END:variables
 }

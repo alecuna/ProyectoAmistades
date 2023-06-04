@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import static proyecto.pkg1.Main.grafo;
 
 /**
- *
+ * Interfaz grafica (JFrame) que permite ver la cantidad de islas en el grafo, a traves del recorrido seleccionado 
  * @author Anabella Jaua
  */
 public class VerRecorridos extends javax.swing.JFrame {
@@ -38,7 +38,7 @@ public class VerRecorridos extends javax.swing.JFrame {
         anchura = new javax.swing.JButton();
         profundidad = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -71,12 +71,12 @@ public class VerRecorridos extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Por favor seleccione el tipo de recorrido que desea realizar para obtener el numero de islas");
 
-        jButton3.setBackground(new java.awt.Color(219, 219, 241));
-        jButton3.setForeground(new java.awt.Color(51, 51, 51));
-        jButton3.setText("Salir");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        exit.setBackground(new java.awt.Color(219, 219, 241));
+        exit.setForeground(new java.awt.Color(51, 51, 51));
+        exit.setText("Salir");
+        exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                exitActionPerformed(evt);
             }
         });
 
@@ -106,7 +106,7 @@ public class VerRecorridos extends javax.swing.JFrame {
                         .addComponent(jLabel3))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(242, 242, 242)
-                        .addComponent(jButton3)))
+                        .addComponent(exit)))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -124,7 +124,7 @@ public class VerRecorridos extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(resultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
-                .addComponent(jButton3)
+                .addComponent(exit)
                 .addGap(28, 28, 28))
         );
 
@@ -133,35 +133,39 @@ public class VerRecorridos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+    /**
+     * Metodo que define la accion realizada al tocar el boton de "Salir"
+     * @param evt, evento llevado a cabo por el usuario
+     */
+    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
+        // Se cierra la ventana
         this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_exitActionPerformed
 
+    /**
+     * Metodo que define la accion realizada al tocar el boton de "Hacer recorrido por anchura"
+     * @param evt, evento llevado a cabo por el usuario
+     */
     private void anchuraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anchuraActionPerformed
-        // TODO add your handling code here:
+        // Se realiza el recorrido por anchura del grafo y se muestra la cantidad de islas resultantes
         int islas = 0;
         try {
             islas = grafo.BFS();
             resultado.setText(String.valueOf(islas));
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex);
+            
         }
-        
-        
     }//GEN-LAST:event_anchuraActionPerformed
 
     private void profundidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profundidadActionPerformed
-        // TODO add your handling code here:
+        // Se realiza el recorrido por profundidad del grafo y se muestra la cantidad de islas resultantes
         int islas = 0;
         try {
             islas = grafo.DFS();
             resultado.setText(String.valueOf(islas));
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex);
         }
-        
-       
+             
     }//GEN-LAST:event_profundidadActionPerformed
 
     /**
@@ -201,7 +205,7 @@ public class VerRecorridos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton anchura;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton exit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

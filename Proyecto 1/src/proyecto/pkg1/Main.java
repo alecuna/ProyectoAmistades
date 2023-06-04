@@ -4,17 +4,14 @@
  */
 package proyecto.pkg1;
 
-
-import java.io.File;
 import proyecto.pkg1.Functions.FunctionsGrafos;
 import proyecto.pkg1.Functions.FunctionsTXT;
 import proyecto.pkg1.Functions.LeerArchivo;
 import proyecto.pkg1.GUIs.Ventana1;
 import proyecto.pkg1.Grafo.Grafo;
-import proyecto.pkg1.Grafo.User;
 
 /**
- *
+ * Clase main que inicia el programa 
  * @author Anabella Jaua
  */
 public class Main {
@@ -24,6 +21,7 @@ public class Main {
      */
     public static void main(String[] args) {
        
+        // Se crea el grafo a partir de la informacion guardada 
         LeerArchivo f = new LeerArchivo();
         FunctionsTXT use = new FunctionsTXT();
         FunctionsGrafos grafoFunctions = new FunctionsGrafos();
@@ -33,14 +31,11 @@ public class Main {
         String[] relaciones = use.getRelaciones(infoGrafo);
         grafo = grafoFunctions.crearGrafo(users, relaciones);
        
-      
+        // Se abre la pantalla principal 
         Ventana1 window = new Ventana1();
         window.setVisible(true);       
         window.setLocationRelativeTo(null);
         window.setResizable(false);
-        
-
-
 
     }
     

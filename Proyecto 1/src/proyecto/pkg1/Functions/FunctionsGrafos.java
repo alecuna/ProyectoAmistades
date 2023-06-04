@@ -21,11 +21,12 @@ import proyecto.pkg1.Grafo.NodoVertex;
 import proyecto.pkg1.Grafo.User;
 
 /**
- *
+ * Clase que define metodos adicionales para implementar la clase grafo y visualizar su contenido 
  * @author Anabella Jaua
  */
 public class FunctionsGrafos {
     
+    //Variables declaradas como atributos de la clase para facilitar el manejo de los metodos creados 
     Grafo grafoAux = new Grafo();
     LeerArchivo f = new LeerArchivo();
     FunctionsTXT use = new FunctionsTXT();
@@ -33,6 +34,12 @@ public class FunctionsGrafos {
     String[] users = use.getUsuarios(infoGrafo);
     String[] relaciones = use.getRelaciones(infoGrafo);
     
+    /**
+     * Metodo que crea un grafo nuevo a partir de la informacion guardada en el TXT
+     * @param users, lista de usuarios guardados
+     * @param relaciones, lista de relaciones guardadas
+     * @return Grafo nuevo con la informacion del TXT
+     */
     public Grafo crearGrafo(String[] users, String[] relaciones){
         for (int i = 1; i < users.length; i++) {
             String[] info = users[i].trim().split(",");
@@ -46,9 +53,6 @@ public class FunctionsGrafos {
                 int id2 = Integer.parseInt(relationships[1].trim());
                 int years = Integer.parseInt(relationships[2].trim());
                 ListaVertex usersGrafo = grafoAux.getUserList();
-//                NodoVertex pointer = usersGrafo.getHead();
-//                User userAux = (User) pointer.getElement();
-//                int idAux = userAux.getUserID();
                 User idName1 = getUsuarioByID(usersGrafo, id1);
                 User idName2 = getUsuarioByID(usersGrafo, id2);
                 if (idName1 != null && idName2 != null){
@@ -56,12 +60,16 @@ public class FunctionsGrafos {
                 }else{
                     JOptionPane.showMessageDialog(null, "error");
                    }
-                
         } return grafoAux;
         
         }
       
-     
+     /**
+      * Metodo que permite obtener un usuario a partir de su id
+      * @param allUsers, lista de todos los usuarios del grafo
+      * @param id, id del usuario que se desea buscar
+      * @return User correspondiente al ID ingresado, o null si el usuario no existe 
+      */
     public User getUsuarioByID(ListaVertex allUsers, int id){
         User name = null;
         for (NodoVertex i = allUsers.getHead(); i != null; i=i.getNext()) {
@@ -72,55 +80,14 @@ public class FunctionsGrafos {
             } 
         } return name;
     }
-    
-    public boolean validarAgregarUser (Grafo grafo,String idUser1, String idUser2, String username1,String username2, String years){
-        try{
-            if (username1.charAt(0)!='@' || username2.charAt(0)!='@'){
-                    JOptionPane.showMessageDialog(null, "Error: Recuerde colocar @ antes de los usernames de los usuarios");
-                    return false;
-            }
-            int year = Integer.parseInt(years);
-            int id1 = Integer.parseInt(idUser1);
-            int id2 = Integer.parseInt(idUser2);
 
-            if (id1 == id2){
-                JOptionPane.showMessageDialog(null, "Error: Recuerde que dos usuarios no pueden tener el mismo id");
-                return false;
-            } if (username1.equalsIgnoreCase(username2)){
-                JOptionPane.showMessageDialog(null, "Error: Recuerde que dos usuarios no pueden tener el mismo username");
-                return false;
-            }
-            User usuario1 = new User(username1, id1);
-            User usuario2 = new User(username2, id2);
-            ListaVertex listaUsers = grafo.getUserList();
-            for (NodoVertex pointer = listaUsers.getHead(); pointer != listaUsers.getTail(); pointer = pointer.getNext()) {
-                User usuarioComparar =(User) pointer.getElement();
-                String usernameComparar = usuarioComparar.getUsername();
-                int idComparar = usuarioComparar.getUserID();
-//                if((usuario1.getUserID() == idComparar && !usuario1.getUsername().equalsIgnoreCase(usernameComparar)) || (usuario1.getUserID() != idComparar && usuario1.getUsername().equalsIgnoreCase(usernameComparar))){
-//                    JOptionPane.showMessageDialog(null, "Error: Los valores del usuario 1 no coinciden con los guardados en el sistema.\nRecuerde que un usuario tiene un unico id y username");
-//                    return false;
-//                } if((usuario2.getUserID() == idComparar && !usuario2.getUsername().equalsIgnoreCase(usernameComparar)) || (usuario2.getUserID() != idComparar && usuario2.getUsername().equalsIgnoreCase(usernameComparar))){
-//                    JOptionPane.showMessageDialog(null, "Error: Los valores del usuario 2 no coinciden con los guardados en el sistema.\nRecuerde que un usuario tiene un unico id y username");
-//                    return false;
-//                }; 
-                if( idComparar == id1 ){
-                    JOptionPane.showMessageDialog(null, "El usuario 1 ya esta registrado en el sistema. Ingrese solo usuarios nuevos.");
-                    return false;
-                } if (idComparar == id2){
-                    JOptionPane.showMessageDialog(null, "El usuario 2 ya esta registrado en el sistema. Ingrese solo usuarios nuevos.");
-                    return false;
-                }
-
-        }}catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Error: Recuerde solo ingresar numeros enteros en los ids y en los años de amistad");
-            return false;
-        } 
-        return true;
-        
-    
-        }
-    
+    /**
+     * Metodo que permite validar el usuario que se quiere añadir al grafo
+     * @param grafo actual
+     * @param idUser1, id del usuario nuevo
+     * @param username1, username del usuario nuevo
+     * @return Valor logico de si el usuario puede o no agregarse al grafo 
+     */
     public boolean validarAddUser (Grafo grafo,String idUser1, String username1){
         try{
             if (username1.charAt(0)!='@'){
@@ -132,12 +99,15 @@ public class FunctionsGrafos {
             ListaVertex listaUsers = grafo.getUserList();
             for (NodoVertex pointer = listaUsers.getHead(); pointer != listaUsers.getTail(); pointer = pointer.getNext()) {
                 User usuarioComparar =(User) pointer.getElement();
+                User ultimoUser = (User) listaUsers.getTail().getElement();
                 String usernameComparar = usuarioComparar.getUsername();
+                String ultimoUsername = ultimoUser.getUsername();
                 int idComparar = usuarioComparar.getUserID();
-                if( idComparar == id1 ){
+                int ultimoId = ultimoUser.getUserID();
+                if( idComparar == id1 || idComparar == ultimoId){
                     JOptionPane.showMessageDialog(null, "Ya existe un usuario registrado con el id "+id1+"\nIngrese unicamente usuarios nuevos por favor.");
                     return false;
-                } else if( usernameComparar.trim().equalsIgnoreCase(username1)){
+                } else if( usernameComparar.trim().equalsIgnoreCase(username1) ||  ultimoUsername.trim().equalsIgnoreCase(username1)){
                     JOptionPane.showMessageDialog(null, "Ya existe un usuario registrado con el username "+username1+"\nIngrese unicamente usuarios nuevos por favor.");
                     return false;
                 }
@@ -148,32 +118,13 @@ public class FunctionsGrafos {
         } 
         return true;
         
-    
         }
-           
-    public void viewGraph(Graph graph) {
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
-        JPanel panel = new JPanel(new GridLayout()){
-        @Override
-        public Dimension getPreferredSize() {
-            return new Dimension(640, 480);
-            }
-        };
-        frame.setSize(panel.getWidth(), panel.getHeight());
-        frame.setBackground(Color.blue);
-        Viewer viewer = new SwingViewer(graph, Viewer.ThreadingModel.GRAPH_IN_GUI_THREAD);
-        viewer.enableAutoLayout();
-        ViewPanel viewPanel = (ViewPanel) viewer.addDefaultView(false);
-        panel.add(viewPanel);
-        frame.add(panel);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);  
-        
-    }
-    
+         
+    /**
+     * Metodo que permite convertir el grafo guardado al grafo requerido por la libreria para poder dibujarlo
+     * @param grafo actual
+     * @return Grafo de la clase Graph perteneciente a la libreria GraphStream 
+     */
     public Graph drawGraph (Grafo grafo){
         Graph graph = new MultiGraph("Relacion");
         System.setProperty("org.graphstream.ui", "swing");
@@ -197,6 +148,36 @@ public class FunctionsGrafos {
     } return graph;
     }
     
+    /**
+     * Metodo que permite visualizar el grafo, haciendo uso de la libreria GraphStream 
+     * @param graph, grafo del la clase Graph obtenido en el metodo drawGraph
+     */
+    public void viewGraph(Graph graph) {
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+        JPanel panel = new JPanel(new GridLayout()){
+        @Override
+        public Dimension getPreferredSize() {
+            return new Dimension(640, 480);
+            }
+        };
+        frame.setSize(panel.getWidth(), panel.getHeight());
+        frame.setBackground(Color.blue);
+        Viewer viewer = new SwingViewer(graph, Viewer.ThreadingModel.GRAPH_IN_GUI_THREAD);
+        viewer.enableAutoLayout();
+        ViewPanel viewPanel = (ViewPanel) viewer.addDefaultView(false);
+        panel.add(viewPanel);
+        frame.add(panel);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);  
+        
+    }
+    
+    /**
+     * Metodo que permite visualizar un grafo auxiliar creado para prevenir errores que puedan surgir de la libreria GraphStream
+     */
     public void drawGrafoAux (){
         Grafo grafoAuxiliar = new Grafo();
         grafoAuxiliar = crearGrafo(users, relaciones);

@@ -12,7 +12,7 @@ import proyecto.pkg1.Grafo.User;
 import static proyecto.pkg1.Main.grafo;
 
 /**
- *
+ * Interfaz grafica (JFrame) que permite agregar un nuevo usuario al grafo
  * @author Anabella Jaua
  */
 public class AddUser extends javax.swing.JFrame {
@@ -40,8 +40,8 @@ public class AddUser extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         user1 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        nuevoUser = new javax.swing.JButton();
+        exit = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -67,17 +67,17 @@ public class AddUser extends javax.swing.JFrame {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/pkg1/GUIs/Images/user.png"))); // NOI18N
         jLabel6.setText("Agregar usuario");
 
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        nuevoUser.setText("Agregar");
+        nuevoUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                nuevoUserActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Salir");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        exit.setText("Salir");
+        exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                exitActionPerformed(evt);
             }
         });
 
@@ -98,9 +98,9 @@ public class AddUser extends javax.swing.JFrame {
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(nuevoUser)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton2)
+                                .addComponent(exit)
                                 .addGap(162, 162, 162))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel6)
@@ -137,8 +137,8 @@ public class AddUser extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(nuevoUser)
+                    .addComponent(exit))
                 .addGap(29, 29, 29)
                 .addComponent(jLabel8)
                 .addContainerGap())
@@ -149,8 +149,12 @@ public class AddUser extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    /**
+     * Metodo que define la accion realizada al tocar el boton de "Agregar"
+     * @param evt, evento llevado a cabo por el usuario
+     */
+    private void nuevoUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoUserActionPerformed
+        // Se valida que el usuario no este registrado y se añade al grafo
         FunctionsTXT txt = new FunctionsTXT();
         FunctionsGrafos useful = new FunctionsGrafos();
         boolean run = useful.validarAddUser(grafo, id1.getText(), user1.getText());
@@ -162,16 +166,20 @@ public class AddUser extends javax.swing.JFrame {
             txt.agregarUser(usuario1, iduser1);
             JOptionPane.showMessageDialog(null, "Usuario agregado con exito!");}
         id1.setText("");
-        user1.setText("");
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+        user1.setText(""); 
+    }//GEN-LAST:event_nuevoUserActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    /**
+     * Metodo que define la accion realizada al tocar el boton de "Salir"
+     * @param evt, evento llevado a cabo por el usuario
+     */
+    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
+        // Se cierra la ventana 
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_exitActionPerformed
 
     private void user1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_user1ActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_user1ActionPerformed
 
     /**
@@ -210,15 +218,15 @@ public class AddUser extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton exit;
     private javax.swing.JTextField id1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton nuevoUser;
     private javax.swing.JTextField user1;
     // End of variables declaration//GEN-END:variables
 }

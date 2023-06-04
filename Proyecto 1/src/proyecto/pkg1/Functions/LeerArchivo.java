@@ -10,15 +10,15 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Clase que define un metodo que permite leer el archivo TXT a partir de su ruta 
  * @author Maria Daniela
  */
 public class LeerArchivo {
 
     /**
-     * Funcion para guardar el contenido del archivo seleccionado como string
-     * @param url, path del archivo seleccionado por el usuario
-     * @return String grafo_txt, contenido del archivo seleccionado
+     * Funcion para guardar el contenido del archivo seleccionado como string lo cual permite contruir el grafo inicial 
+     * @param url, ruta del archivo 
+     * @return Contenido del archivo 
      */
     public String leertxt(String url){
 
@@ -37,16 +37,12 @@ public class LeerArchivo {
                     } 
                 }
                 br.close();
-//                JOptionPane.showMessageDialog(null, "Lectura Exitosa");
+
             }
         }catch(Exception err){
              JOptionPane.showMessageDialog(null, "Error");
         }
 
-//        Scanner scanner = new Scanner(grafo_txt);
-//        while (scanner.hasNextLine()){
-//            System.out.println(scanner.nextLine());
-//        }
         return grafo_txt;
     }
 }

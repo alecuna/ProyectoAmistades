@@ -12,17 +12,19 @@ import proyecto.pkg1.Grafo.User;
 import static proyecto.pkg1.Main.grafo;
 
 /**
- *
+ * Interfaz grafica (JFrame) que permite agregar una relacion nueva entre dos usuarios registrados en el grafo
  * @author Anabella Jaua
  */
 public class AgregarRelacion extends javax.swing.JFrame {
+    // Atributo de la clase
     ListaVertex listaUsers = grafo.getUserList();
 
     /**
-     * Creates new form Puentes
+     * Creates new form AgregarRelacion
      */
     public AgregarRelacion() {
         initComponents();
+        // Se agregan los usuarios guardados en el grafo como items a los 2 combo box de la interfaz
         for (NodoVertex pointer = listaUsers.getHead(); pointer != listaUsers.getTail(); pointer = pointer.getNext()) {
            User usuario = (User) pointer.getElement();
            user1.addItem(usuario.getUsername());
@@ -49,8 +51,8 @@ public class AgregarRelacion extends javax.swing.JFrame {
         user2 = new javax.swing.JComboBox<>();
         years = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        nuevaRelacion = new javax.swing.JButton();
+        exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -69,17 +71,17 @@ public class AgregarRelacion extends javax.swing.JFrame {
 
         jLabel2.setText("Años de amistad:");
 
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        nuevaRelacion.setText("Agregar");
+        nuevaRelacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                nuevaRelacionActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Salir");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        exit.setText("Salir");
+        exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                exitActionPerformed(evt);
             }
         });
 
@@ -97,9 +99,9 @@ public class AgregarRelacion extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(4, 4, 4)
-                                .addComponent(jButton1)
+                                .addComponent(nuevaRelacion)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2))
+                                .addComponent(exit))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel2)
@@ -125,8 +127,8 @@ public class AgregarRelacion extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addGap(53, 53, 53)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(nuevaRelacion)
+                    .addComponent(exit))
                 .addContainerGap(104, Short.MAX_VALUE))
         );
 
@@ -148,13 +150,21 @@ public class AgregarRelacion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_yearsActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+    /**
+     * Metodo que define la accion realizada al tocar el boton de "Salir"
+     * @param evt, evento llevado a cabo por el usuario
+     */
+    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
+        // Se cierra la ventana
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_exitActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    /**
+     * Metodo que define la accion realizada al tocar el boton de "Agregar"
+     * @param evt, evento llevado a cabo por el usuario
+     */
+    private void nuevaRelacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaRelacionActionPerformed
+        // Se obtienen los dos usuarios seleccionados, se valida que no exista una relacion entre ellos y se agrega la nueva relacion
         Object selected1 = user1.getSelectedItem();
         Object selected2 = user2.getSelectedItem();
         String usuario1 = selected1.toString();
@@ -167,56 +177,38 @@ public class AgregarRelacion extends javax.swing.JFrame {
         if (usuario1.equals(usuario2)){
             JOptionPane.showMessageDialog(null, "Recuerde seleccionar dos usuarios diferentes!");
         } else{
-        while (first == null){
-            compare = (User) pointer.getElement();
-            if (compare.getUsername().equals(usuario1)){
-                first = compare;
+            while (first == null){
+                compare = (User) pointer.getElement();
+                if (compare.getUsername().equals(usuario1)){
+                    first = compare;
+                }
+                pointer = pointer.getNext();
+            } 
+            pointer = listaUsers.getHead();
+            while (second == null){
+                compare = (User) pointer.getElement();
+                if (compare.getUsername().equals(usuario2)){
+                    second = compare;
+                }
+                pointer = pointer.getNext();
+            } 
+            if(first == second){
+                JOptionPane.showMessageDialog(null, "Recuerde seleccionar dos usuarios diferentes!");
+            } else if (grafo.checkAdj(first, second)){
+                JOptionPane.showMessageDialog(null, "Los usuarios "+first.getUsername()+" y "+second.getUsername()+" ya estan relacionados");
+            } else{
+                try{
+                    int year = Integer.parseInt(years.getText());
+                    grafo.addEdge(first, second, year);
+                    JOptionPane.showMessageDialog(null, "Relacion agregada exitosamente!");            
+                    txt.agregarRelacion(first.getUserID(), second.getUserID(), year);
+                    years.setText("");
+                } catch (Exception e){
+                    JOptionPane.showMessageDialog(null, "Por favor ingrese unicamente numeros enteros en la casilla de años de amistad");            
+                }
             }
-            pointer = pointer.getNext();
         } 
-        pointer = listaUsers.getHead();
-        while (second == null){
-            compare = (User) pointer.getElement();
-            if (compare.getUsername().equals(usuario2)){
-                second = compare;
-            }
-            pointer = pointer.getNext();
-        } 
-        if(first == second){
-            JOptionPane.showMessageDialog(null, "Recuerde seleccionar dos usuarios diferentes!");
-        }else if (grafo.checkAdj(first, second)){
-            JOptionPane.showMessageDialog(null, "Los usuarios "+first.getUsername()+" y "+second.getUsername()+" ya estan relacionados");
-        } else{
-            try{
-                int year = Integer.parseInt(years.getText());
-                grafo.addEdge(first, second, year);
-                JOptionPane.showMessageDialog(null, "Relacion agregada exitosamente!");            
-                txt.agregarRelacion(first.getUserID(), second.getUserID(), year);
-                years.setText("");
-            } catch (Exception e){
-                JOptionPane.showMessageDialog(null, "Por favor ingrese unicamente numeros enteros en la casilla de años de amistad");            
-            }
-        }
-            
-        }
-//        try{
-//            if(first == second){
-//                JOptionPane.showMessageDialog(null, "Recuerde seleccionar dos usuarios diferentes!");
-//            } else{
-//            int year = Integer.parseInt(years.getText());
-//            if (grafo.checkAdj(first, second)){
-//                grafo.deleteEdge(first, second);
-//                grafo.addEdge(first, second, year);
-//            }
-//            txt.agregarRelacion(first.getUserID(), second.getUserID(), year);
-//            
-//            JOptionPane.showMessageDialog(null, "Relacion agregada!");}
-//        } catch (Exception e){
-//            JOptionPane.showMessageDialog(null, "Por favor ingrese unicamente numeros enteros en la casilla de años de amistad");
-//        }
-//        }
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_nuevaRelacionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -254,11 +246,11 @@ public class AgregarRelacion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton exit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton nuevaRelacion;
     private javax.swing.JComboBox<String> user1;
     private javax.swing.JComboBox<String> user2;
     private javax.swing.JTextField years;

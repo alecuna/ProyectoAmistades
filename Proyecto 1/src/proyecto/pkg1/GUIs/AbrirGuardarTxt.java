@@ -24,10 +24,12 @@ import proyecto.pkg1.Grafo.Grafo;
 import static proyecto.pkg1.Main.grafo;
 
 /**
- *
+ * Interfaz grafica (JFrame) que permite al usuario seleccionar un archivo y guardar su contenido
  * @author Anabella Jaua
  */
 public class AbrirGuardarTxt extends javax.swing.JFrame {
+    
+    // Atributos de la clase
     JFileChooser seleccionar = new JFileChooser();
     File archivo; 
     FileInputStream entrada; 
@@ -37,19 +39,12 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
     public String[] relaciones;
     private String contenidoFile;
   
-//    /**
-//     * Creates new form AbrirGuardarTxt
-//     */
+    /**
+     * Creates new form AbrirGuardarTxt
+     */
     public AbrirGuardarTxt() {
         initComponents();
         
-    }
-
-   
-
-    
-    public File getArchivo() {
-        return archivo;
     }
 
     FunctionsTXT f = new FunctionsTXT();
@@ -182,57 +177,13 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Metodo que define la accion realizada al tocar el boton de "Guardar Cambios"
+     * @param evt, evento llevado a cabo por el usuario
+     */
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
-// Boton que permite guardar la informacion del archivo seleccionado por el usuario en el sistema
-//        if (seleccionar.showDialog(null, "Guardar")== JFileChooser.APPROVE_OPTION){
-//            archivo= seleccionar.getSelectedFile();
-//            if (archivo.getName().endsWith("txt")){
-//                String Documento = texto.getText();
-//                String mensaje= f.GuardarArchivo(archivo,Documento);
-//                if(mensaje!= null){
-//                    JOptionPane.showMessageDialog(null, mensaje);
-//                }else{
-//                    JOptionPane.showMessageDialog(null, "Archivo no Compatible");
-//                }
-//            }else{
-//                JOptionPane.showMessageDialog(null, "Guardar documento de Texto");
-//            }
-//        } 
-//        if (seleccionar.showDialog(null, "Guardar Cambios")== JFileChooser.APPROVE_OPTION){   
-//        }
-//        File arch = seleccionar.getSelectedFile();
-//        String path = arch.getAbsolutePath();
-//        String contenido = content.leertxt(path);
-//        
-//        File database = new File("..\\TxtProyecto.txt"); 
-//        FileWriter fw = null;
-//        FileReader fr = null;
-//        try {
-//            fw = new FileWriter(database);
-//            fr = new FileReader(database);
-//        } catch (IOException ex) {
-//            Logger.getLogger(AbrirGuardarTxt.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        BufferedWriter bw = new BufferedWriter(fw);
-//        BufferedReader br = new BufferedReader(fr);
-//        
-//        String[] contenidoUsers = f.getUsuarios(contenido);
-//        String[] contenidoRelaciones = f.getRelaciones(contenido);
-//        try{
-//            if (br.readLine().equals("Usuarios" )){
-//                for (int i = 1; i < contenidoUsers.length; i++) {
-//                    bw.append("\n"+contenidoUsers[i]);
-//                }}
-//            if (br.readLine().equals("Relaciones")){
-//                for (int i = 1; i < contenidoRelaciones.length; i++) {
-//                    bw.append("\n"+contenidoRelaciones[i]);
-//                }}
-//            bw.close();
-//            br.close();
-//        } catch (Exception e){
-//        Logger.getLogger(AbrirGuardarTxt.class.getName()).log(Level.SEVERE, null, e);
-//        } 
-        if (guardar){
+    // Boton que permite guardar la informacion del archivo seleccionado por el usuario en el sistema
+    if (guardar){
         int response = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea guardar los nuevos datos? Se reemplazara la base de datos existente en el sistema");
         if (response == JOptionPane.YES_OPTION) {
             f.escribir_txt(contenidoFile);
@@ -244,16 +195,17 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
         }
         else{
             JOptionPane.showMessageDialog(null, "No se han guardado los datos");
-        }} else{
-            JOptionPane.showMessageDialog(null, "Por favor ingrese un archivo con la estructura requerida\npara actualizar la base de datos del sistema");
-        }   
-
-        
-       
+    }} else{
+        JOptionPane.showMessageDialog(null, "Por favor ingrese un archivo con la estructura requerida\npara actualizar la base de datos del sistema");
+        }        
     }//GEN-LAST:event_GuardarActionPerformed
 
+    /**
+     * Metodo que define la accion realizada al tocar el boton de "Abrir Archivo"
+     * @param evt, evento llevado a cabo por el usuario
+     */
     private void AbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirActionPerformed
-        // Boton que permite seleccionar archivo y verifica que se cumpla la estructura requerida
+        // Boton que permite seleccionar un archivo txt y verifica que se cumpla la estructura requerida
         if (seleccionar.showDialog(null, "Abrir")==JFileChooser.APPROVE_OPTION){
             archivo = seleccionar.getSelectedFile();
             if (archivo.canRead()){
@@ -275,8 +227,12 @@ public class AbrirGuardarTxt extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_AbrirActionPerformed
 
+    /**
+     * Metodo que define la accion realizada al tocar el boton X (para salir)
+     * @param evt, evento llevado a cabo por el usuario
+     */
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
-        // TODO add your handling code here:
+        // Se confirma que el usuario desee salir y se cierra la ventana 
         int response = JOptionPane.showConfirmDialog(this, "¿Esta seguro que desea salir? Los cambios no guardados seran eliminados.");
         if (response == JOptionPane.YES_OPTION) {
             this.dispose();

@@ -16,7 +16,7 @@ import proyecto.pkg1.Functions.FunctionsGrafos;
 import static proyecto.pkg1.Main.grafo;
 
 /**
- *
+ * Interfaz grafica (JFrame) que muestra el menu inicial del proyecto
  * @author Anabella Jaua
  */
 public class Ventana1 extends javax.swing.JFrame {
@@ -144,77 +144,81 @@ public class Ventana1 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ingresarMouseClicked
 
+    /**
+     * Metodo que define la accion realizada al tocar el boton de "Ingresar archivo"
+     * @param evt, evento llevado a cabo por el usuario
+     */
     private void ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarActionPerformed
-        // TODO add your handling code here:
-//        JFileChooser chooser = new JFileChooser();
-//        int returnVal = chooser.showOpenDialog(null);
-//        if(returnVal == JFileChooser.APPROVE_OPTION) {
-//            File file = chooser.getSelectedFile();
-//            BufferedReader reader;
-//            StringBuilder sb = new StringBuilder();
-//            try {
-//                reader = new BufferedReader(new FileReader(file));
-//                String line = reader.readLine();
-//                while (line != null) {
-//                    sb.append(line);
-//                    sb.append(System.lineSeparator());
-//                    line = reader.readLine();
-//                }
-//                String fileContent = sb.toString();
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            JOptionPane.showMessageDialog(null, "", "File Chooser", 0);
+        // Se abre el JFrame "AbrirGuardarTxt"
         AbrirGuardarTxt archivo = new AbrirGuardarTxt();
         archivo.setVisible(true);
         archivo.setLocationRelativeTo(null);
-
     }//GEN-LAST:event_ingresarActionPerformed
 
+    /**
+     * Metodo que define la accion realizada al tocar el boton de "Mostrar grafo"
+     * @param evt, evento llevado a cabo por el usuario
+     */
     private void ShowGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowGraphActionPerformed
-        // TODO add your handling code here:
+        //Se muestra el grafo guardado en el sistema
         try{
-        Graph dibujoGrafo = funcionesGrafo.drawGraph(grafo);
-        funcionesGrafo.viewGraph(dibujoGrafo);
+            Graph dibujoGrafo = funcionesGrafo.drawGraph(grafo);
+            funcionesGrafo.viewGraph(dibujoGrafo);
         }catch (Exception e){
             funcionesGrafo.drawGrafoAux();
-            JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_ShowGraphActionPerformed
 
+    /**
+     * Metodo que define la accion realizada al tocar el boton de "Identificar puentes"
+     * @param evt, evento llevado a cabo por el usuario
+     */
     private void ShowPuentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowPuentesActionPerformed
-        // TODO add your handling code here:
+        // Se abre el JFrame "Puentes"
         Puentes bridges = new Puentes();
         bridges.setVisible(true);
         bridges.setLocationRelativeTo(null);
     }//GEN-LAST:event_ShowPuentesActionPerformed
 
+    /**
+     * Metodo que define la accion realizada al tocar el boton de "Agregar usuario"
+     * @param evt, evento llevado a cabo por el usuario
+     */
     private void addUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserActionPerformed
-//       AgregarUser add = new AgregarUser();
-//       add.setVisible(true);
-//       add.setLocationRelativeTo(null);
+        // Se abre el JFrame "AddUser"
        AddUser adding = new AddUser();
        adding.setVisible(true);
        adding.setLocationRelativeTo(null);
     }//GEN-LAST:event_addUserActionPerformed
 
+    /**
+     * Metodo que define la accion realizada al tocar el boton de "Eliminar usuario"
+     * @param evt, evento llevado a cabo por el usuario
+     */
     private void deleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserActionPerformed
+        // Se abre el JFrame "EliminarUser"
         EliminarUser delete = new EliminarUser();
         delete.setVisible(true);
         delete.setLocationRelativeTo(null);
     }//GEN-LAST:event_deleteUserActionPerformed
 
+    /**
+     * Metodo que define la accion realizada al tocar el boton de "Ver cantidad de islas"
+     * @param evt, evento llevado a cabo por el usuario
+     */
     private void ShowIslasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowIslasActionPerformed
-        // TODO add your handling code here:
+        // Se abre el JFrame "VerRecorridos"
         VerRecorridos islas = new VerRecorridos();
         islas.setVisible(true);
         islas.setLocationRelativeTo(null);
     }//GEN-LAST:event_ShowIslasActionPerformed
 
+    /**
+     * Metodo que define la accion realizada al tocar el boton de "Agregar relacion"
+     * @param evt, evento llevado a cabo por el usuario
+     */
     private void relacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relacionActionPerformed
-        // TODO add your handling code here:
+        // Se abre el JFrame "AgregarRelacion"
         AgregarRelacion relations = new AgregarRelacion();
         relations.setVisible(true);
         relations.setLocationRelativeTo(null);

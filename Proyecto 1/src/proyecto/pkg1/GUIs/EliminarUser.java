@@ -12,18 +12,19 @@ import proyecto.pkg1.Grafo.User;
 import static proyecto.pkg1.Main.grafo;
 
 /**
- *
+ * Interfaz grafica (JFrame) que permite eliminar un usuario del sistema 
  * @author Anabella Jaua
  */
 public class EliminarUser extends javax.swing.JFrame {
+    // Atributos de la clase
     ListaVertex listaUsers = grafo.getUserList();
-//    String[] usuarios = AbrirGuardarTxt.usuarios;
     
     /**
      * Creates new form EliminarUser
      */
     public EliminarUser() {
         initComponents();   
+        // Se agregan los usuarios guardados en el grafo como items al combo box de la interfaz
         for (NodoVertex pointer = listaUsers.getHead(); pointer != listaUsers.getTail(); pointer = pointer.getNext()) {
            User usuario = (User) pointer.getElement();
            SelectUser.addItem(usuario.getUsername());
@@ -31,6 +32,7 @@ public class EliminarUser extends javax.swing.JFrame {
         User last = (User) listaUsers.getTail().getElement();
         SelectUser.addItem(last.getUsername());
     }
+    
     FunctionsTXT txt = new FunctionsTXT();
     FunctionsGrafos grafosF = new FunctionsGrafos();
     /**
@@ -47,7 +49,7 @@ public class EliminarUser extends javax.swing.JFrame {
         SelectUser = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         deleteUser = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        exit = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -74,10 +76,10 @@ public class EliminarUser extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Salir");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        exit.setText("Salir");
+        exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                exitActionPerformed(evt);
             }
         });
 
@@ -102,7 +104,7 @@ public class EliminarUser extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(SelectUser, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3))
+                            .addComponent(exit))
                         .addGap(141, 141, 141))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -124,7 +126,7 @@ public class EliminarUser extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deleteUser)
-                    .addComponent(jButton3))
+                    .addComponent(exit))
                 .addGap(33, 33, 33)
                 .addComponent(jLabel3)
                 .addContainerGap())
@@ -144,17 +146,25 @@ public class EliminarUser extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    /**
+     * Metodo que define la accion realizada al tocar el boton de "Salir"
+     * @param evt, evento llevado a cabo por el usuario
+     */
+    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
+        //Se cierra la ventana
         this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_exitActionPerformed
 
     private void SelectUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectUserActionPerformed
-        // TODO add your handling code here:
         
     }//GEN-LAST:event_SelectUserActionPerformed
 
+    /**
+     * Metodo que define la accion realizada al tocar el boton de "Eliminar"
+     * @param evt, evento llevado a cabo por el usuario
+     */
     private void deleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserActionPerformed
-        // TODO add your handling code here:
+        // Se obtiene el usuario seleccionado y se elimina del grafo
         Object selected = SelectUser.getSelectedItem();
         String usuario = selected.toString();
         JOptionPane.showMessageDialog(null, "Usuario "+ usuario+ " eliminado");
@@ -213,8 +223,8 @@ public class EliminarUser extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JComboBox<String> SelectUser;
     private javax.swing.JButton deleteUser;
+    private javax.swing.JButton exit;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
