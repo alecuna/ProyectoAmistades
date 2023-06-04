@@ -37,6 +37,7 @@ public class Ventana1 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         ShowGraph = new javax.swing.JButton();
         ShowIslas = new javax.swing.JButton();
@@ -46,7 +47,10 @@ public class Ventana1 extends javax.swing.JFrame {
         deleteUser = new javax.swing.JButton();
         relacion = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+
+        jLabel4.setText("jLabel4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -54,7 +58,7 @@ public class Ventana1 extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 46)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Bienvenido!");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 290, 62));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 290, 62));
 
         ShowGraph.setText("Ver grafo");
         ShowGraph.addActionListener(new java.awt.event.ActionListener() {
@@ -62,7 +66,7 @@ public class Ventana1 extends javax.swing.JFrame {
                 ShowGraphActionPerformed(evt);
             }
         });
-        getContentPane().add(ShowGraph, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 180, 30));
+        getContentPane().add(ShowGraph, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 150, 180, 30));
 
         ShowIslas.setText("Ver cantidad de islas");
         ShowIslas.addActionListener(new java.awt.event.ActionListener() {
@@ -70,7 +74,7 @@ public class Ventana1 extends javax.swing.JFrame {
                 ShowIslasActionPerformed(evt);
             }
         });
-        getContentPane().add(ShowIslas, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 180, 180, 30));
+        getContentPane().add(ShowIslas, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 210, 180, 30));
 
         ShowPuentes.setText("Identificar puentes");
         ShowPuentes.addActionListener(new java.awt.event.ActionListener() {
@@ -78,7 +82,7 @@ public class Ventana1 extends javax.swing.JFrame {
                 ShowPuentesActionPerformed(evt);
             }
         });
-        getContentPane().add(ShowPuentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 240, 180, 30));
+        getContentPane().add(ShowPuentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, 180, 30));
 
         addUser.setText("Agregar usuario");
         addUser.addActionListener(new java.awt.event.ActionListener() {
@@ -86,7 +90,7 @@ public class Ventana1 extends javax.swing.JFrame {
                 addUserActionPerformed(evt);
             }
         });
-        getContentPane().add(addUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, 180, 30));
+        getContentPane().add(addUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 330, 180, 30));
 
         ingresar.setText("Ingresar archivo");
         ingresar.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/pkg1/GUIs/Images/button.png"))); // NOI18N
@@ -101,7 +105,7 @@ public class Ventana1 extends javax.swing.JFrame {
                 ingresarActionPerformed(evt);
             }
         });
-        getContentPane().add(ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, 180, 30));
+        getContentPane().add(ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 90, 180, 30));
 
         deleteUser.setText("Eliminar usuario");
         deleteUser.addActionListener(new java.awt.event.ActionListener() {
@@ -109,7 +113,7 @@ public class Ventana1 extends javax.swing.JFrame {
                 deleteUserActionPerformed(evt);
             }
         });
-        getContentPane().add(deleteUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 420, 180, 30));
+        getContentPane().add(deleteUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 450, 180, 30));
 
         relacion.setText("Agregar relacion");
         relacion.addActionListener(new java.awt.event.ActionListener() {
@@ -117,16 +121,21 @@ public class Ventana1 extends javax.swing.JFrame {
                 relacionActionPerformed(evt);
             }
         });
-        getContentPane().add(relacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 360, 180, 30));
+        getContentPane().add(relacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 390, 180, 30));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Semilight", 0, 15)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(234, 234, 234));
         jLabel3.setText("Haga click en la opcion de su preferencia");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Realizado por Maria Daniela Cuervo, Anabella Jaua y Alexandra Lecuna");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 540, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto/pkg1/GUIs/Images/Background.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-210, -90, 890, 610));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-210, -90, 1150, 650));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -166,9 +175,13 @@ public class Ventana1 extends javax.swing.JFrame {
 
     private void ShowGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowGraphActionPerformed
         // TODO add your handling code here:
+        try{
         Graph dibujoGrafo = funcionesGrafo.drawGraph(grafo);
         funcionesGrafo.viewGraph(dibujoGrafo);
-        dibujoGrafo = null;
+        }catch (Exception e){
+            funcionesGrafo.drawGrafoAux();
+            JOptionPane.showMessageDialog(null, e);
+        }
     }//GEN-LAST:event_ShowGraphActionPerformed
 
     private void ShowPuentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowPuentesActionPerformed
@@ -252,6 +265,8 @@ public class Ventana1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JButton relacion;
     // End of variables declaration//GEN-END:variables
 }

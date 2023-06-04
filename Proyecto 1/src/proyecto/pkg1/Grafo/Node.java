@@ -5,25 +5,19 @@
 package proyecto.pkg1.Grafo;
 
 /**
- *
+ * Clase que define los nodos pertenecientes a la cola (QUEUE)
  * @author alexandralecuna
- * @param <T>
+ * @param <T>, Objeto de la clase User (usuario)
  */
 public class Node<T> {
 
-    /**
-     * La infomacion a guardad en el nodo.
-     */
+    //Atributos de la clase
     private T tInfo;
-    /**
-     * El siguiente nodo.
-     */
     private Node<T> pNextNode;
 
     /**
      * Constructor de la clase.
-     *
-     * @param tInfo, la informacion a almacenar en el nodo.
+     * @param tInfo, usuario a almacenar en el nodo 
      */
     public Node(T tInfo) {
         this.tInfo = tInfo;
@@ -31,56 +25,35 @@ public class Node<T> {
     }
 
     /**
-     * Constructor de la clase.
-     */
-    public Node() {
-        this.tInfo = null;
-        this.pNextNode = null;
-    }
-
-    /**
-     * Getter para acceder a la informacion que guarda el nodo.
-     *
-     * @return
+     * Metodo que permite obtener el usuario almacenado en el nodo actual
+     * @return Usuario almacenado en el nodo 
      */
     public T getTInfo() {
         return this.tInfo;
     }
 
     /**
-     * Setter para modificar la informacion que guarda el nodo.
-     *
-     * @param tInfo
+     * Metodo que permite modificar el usuario almacenado en el nodo actual
+     * @param tInfo, nuevo nodo a almacenar en el nodo 
      */
     public void setTInfo(T tInfo) {
         this.tInfo = tInfo;
     }
 
     /**
-     * Getter para acceder al siguiente nodo enlazado.
-     *
-     * @return el nodo siguiente que esta enlazado.
+     * Metodo que permite obtener el nodo siguiente de la cola
+     * @return Nodo siguiente al actual
      */
     public Node<T> getNextNode() {
         return this.pNextNode;
     }
 
     /**
-     * Setter para nodo siguiente que esta enlazado.
-     *
-     * @param pNextNode
+     * Metodo que permite modificar el nodo siguiente al nodo actual de la cola
+     * @param pNextNode, nuevo nodo siguiente al actual 
      */
     public void setNextNode(Node<T> pNextNode) {
         this.pNextNode = pNextNode;
-    }
-
-    @Override
-    public String toString() {
-        return this.tInfo.toString();
-    }
-
-    public void addAttribute(String uilabel, String toString) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

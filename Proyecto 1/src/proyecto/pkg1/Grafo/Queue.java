@@ -5,20 +5,15 @@
 package proyecto.pkg1.Grafo;
 
 /**
- *
- * @author Angel Granado
- * @param <T>
+ * Clase que define una cola para implementar el recorrido por anchura del grafo
+ * @author alexandralecuna
+ * @param <T>, objeto de la clase User (usuario)
  */
 public class Queue<T> {
 
+    //Atributos de la clase
     private int length;
-    /**
-     * Primer elemento de la cola, primero en salir.
-     */
     private Node<T> front;
-    /**
-     * Ultimo elemento de la cola, ultimo en salir
-     */
     private Node<T> back;
 
     /**
@@ -30,84 +25,73 @@ public class Queue<T> {
     }
 
     /**
-     * Getter para acceder a length.
-     *
-     * @return length el tamaño de la cola.
+     * Metodo que permite obtener el tamaño de la cola
+     * @return Tamaño de la cola
      */
     public int getLength() {
         return length;
     }
 
     /**
-     * Setter para modificarl a length.
-     *
-     * @param newLength nuevo tamaño de la cola.
+     * Metodo que permite modificar el tamaño de la cola
+     * @param newLength, nuevo tamaño de la cola
      */
     public void setLegth(int newLength) {
         this.length = newLength;
     }
 
     /**
-     * Getter para acceder al primer nodo en cola.
-     *
-     * @return front primer nodo en la cola.
+     * Metodo para obtener el primer nodo de la cola
+     * @return Primer nodo de la cola
      */
     public Node<T> getFront() {
         return front;
     }
 
     /**
-     * Setter para modificar el primer nodo en cola.
-     *
-     * @param newFront el nuevo nodo que estara al inicio de la cola.
+     * Metodo para modificar el primer nodo de la cola 
+     * @param newFront, nodo que sera el primer nodo de la cola
      */
     public void setFrond(Node<T> newFront) {
         this.front = newFront;
     }
 
     /**
-     * Getter para acceder al ultimo nodo en cola.
-     *
-     * @return back el ultimo nodo en cola.
+     * Metodo para obtener el ultimo nodo de la cola
+     * @return Ultimo nodo de la cola
      */
     public Node<T> getback() {
         return back;
     }
 
     /**
-     * Setter para modificar el ultimo nodo en cola.
-     *
-     * @param newback nuevo nodo que sera el ultimo de la cola.
+     * Metodo para modificar el ultimo nodo de la cola 
+     * @param newBack, nodo que sera el ultimo nodo de la cola
      */
     public void setback(Node<T> newback) {
         this.back = newback;
     }
 
     /**
-     * Retorna el nodo que le precede.
-     *
-     * @param nodo nodo dado
-     * @return nextNodo
+     * Metodo que retorna el nodo siguiente al actual
+     * @param nodo al cual se quiere buscar su siguiente
+     * @return nodo siguiente al nodo ingresado
      */
     public Node<T> next(Node<T> nodo) {
         return nodo.getNextNode();
     }
 
     /**
-     * Verifica si no hay elementos en cola.
-     *
-     * @return boolean true si no hay nodos en cola false si hay al menos un
-     * nodo en la cola.
+     * Metodo que verifica si la cola esta vacia
+     * @return valor logico de si la cola esta vacia
      */
     public boolean isEmpty() {
         return front == null;
     }
 
     /**
-     * Inserta un nodo con la informacion dada despues del ultimo nodo en cola,
-     * y desplaza el back nodo al siguiente nodo.
-     *
-     * @param tInfo informacion a almacenar
+     * Metodo que inserta un nodo al final de la cola
+     * @param tInfo, Usuario almacenado en el nodo a insertar al final de la cola
      */
     public void enqueue(T tInfo) {
         Node<T> newNodo = new Node(tInfo);
@@ -121,9 +105,8 @@ public class Queue<T> {
     }
 
     /**
-     * Saca el primer nodo en cola.
-     *
-     * @return aux el elemento que guarda el primer nodo en cola.
+     * Metodo que elimina el primer elemento de la cola
+     * @return Usuario eliminado 
      */
     public T dequeue() {
         T aux = null;
@@ -133,16 +116,6 @@ public class Queue<T> {
             length--;
         }
         return aux;
-    }
-
-    /**
-     * Libera todos los nodo que estan en la cola.
-     */
-    public void destroyQueue() {
-        for (; front != null;) {
-            this.front = next(front);
-        }
-        System.gc();
     }
 
 }

@@ -151,7 +151,6 @@ public class EliminarUser extends javax.swing.JFrame {
     private void SelectUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectUserActionPerformed
         // TODO add your handling code here:
         
-        
     }//GEN-LAST:event_SelectUserActionPerformed
 
     private void deleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserActionPerformed

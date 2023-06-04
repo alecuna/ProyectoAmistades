@@ -26,16 +26,16 @@ public class Main {
        
         LeerArchivo f = new LeerArchivo();
         FunctionsTXT use = new FunctionsTXT();
+        FunctionsGrafos grafoFunctions = new FunctionsGrafos();
+
         String infoGrafo = f.leertxt("test\\TxtProyecto.txt");
         String[] users = use.getUsuarios(infoGrafo);
         String[] relaciones = use.getRelaciones(infoGrafo);
-        FunctionsGrafos grafoFunctions = new FunctionsGrafos();
         grafo = grafoFunctions.crearGrafo(users, relaciones);
-//        grafo.printVerts();
        
       
         Ventana1 window = new Ventana1();
-        window.setVisible(true);
+        window.setVisible(true);       
         window.setLocationRelativeTo(null);
         window.setResizable(false);
         

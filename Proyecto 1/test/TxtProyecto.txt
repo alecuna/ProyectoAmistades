@@ -11,23 +11,22 @@ Usuarios
 758, @yosoylatorre
 578, @pitiypo
 909, @obiwan123
+893, @caribu_sol
 467, @trapos232
 788, @bandido121
 239, @justiciero11
 443, @fuerza_bruta
 907, @Presentesiempre
-1234789,@aniguby
-1111,@tito
-2222,@anab
-103,@orimonte
-
-
 Relaciones
 121, 254, 7
 121, 909, 8
 254,909,5
+909, 893, 5
+254, 893, 1
+893, 129, 3
 129, 512, 10
 512, 412, 2
+893, 412, 4
 231, 870, 5
 231, 123, 1
 123, 870, 15
@@ -42,6 +41,3 @@ Relaciones
 870, 758, 1
 758, 365, 9
 578, 365, 4
-2222,1111,10000
-2222,1234789,30
-103,129,42

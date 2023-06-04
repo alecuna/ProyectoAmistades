@@ -7,17 +7,19 @@ package proyecto.pkg1.Grafo;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Anabella Jaua
+ * Clase que define las listas doblemente enlazadas conformadas por los nodos vertices del grafo
+ * @author alexandralecuna
+ * @param <T>, Objeto de la clase User (usuario)
  */
 public class ListaVertex<T> {
 
+    //Atributos de la clase 
     private NodoVertex<User> head;
     private NodoVertex<User> tail;
     private int size;
 
     /**
-     * Constructor para una lista vacia
+     * Constructor de la clase
      */
     public ListaVertex() {
         this.head = null;
@@ -26,17 +28,17 @@ public class ListaVertex<T> {
     }
 
     /**
-     * Constructor con el primer nodo
+     * Metodo que evalua si la lista esta vacia
+     * @return valor logico de si la lista esta vacia
      */
-    public ListaVertex(NodoVertex node) {
-        this.head = this.tail = node;
-        size = 1;
-    }
-
     public boolean isEmpty() {
         return head == null;
     }
 
+    /**
+     * Metodo que inserta un nodo al inicio de la lista de vertices
+     * @param element, usuario que sera almacenado en el nodo vertice a insertar al inicio de la lista
+     */
     public void insertBegin(T element) {
         NodoVertex<User> node = new NodoVertex(element);
 
@@ -54,6 +56,10 @@ public class ListaVertex<T> {
         size++;
     }
 
+    /**
+     * Metodo que inserta un nodo al final de la lista de vertices
+     * @param element, usuario que sera almacenado en el nodo vertice a insertar al final de la lista
+     */
     public void insertFinal(User element) {
         NodoVertex<User> node = new NodoVertex(element);
 
@@ -74,8 +80,10 @@ public class ListaVertex<T> {
         size++;
     }
     
-    
-    
+    /**
+     * Metodo que elimina el primer nodo de la lista de vertices
+     * @return Nodo vertice eliminado
+     */
     public NodoVertex deleteBegin(){
         if (isEmpty()) {
             System.out.println("List is Empty");
@@ -95,9 +103,10 @@ public class ListaVertex<T> {
         return null;
     }
     
-    
-    
-    
+     /**
+     * Metodo que elimina el ultimo nodo de la lista de vertices
+     * @return Nodo vertice eliminado
+     */
     public NodoVertex deleteFinal(){
         if (isEmpty()) {
             System.out.println("List is Empty");
@@ -122,6 +131,11 @@ public class ListaVertex<T> {
         return null;
     }
     
+    /**
+     * Metodo que elimina el nodo vertice en una posicion especifica
+     * @param index, indice de posicion del nodo a eliminar
+     * @return El nodo eliminado, o null si la lista vacia o el indice no es valido
+     */
     public NodoVertex deleteInIndex(int index){
         if (isEmpty()) {
             System.out.println("List is Empty");
@@ -155,8 +169,9 @@ public class ListaVertex<T> {
         return null;
     }
     
-    
-    
+    /**
+     * Metodo que imprime la lista de vertices
+     */
     public void printList() {
         if (!isEmpty()) {
 
@@ -176,6 +191,11 @@ public class ListaVertex<T> {
         }
     }
 
+    /**
+     * Metodo que obtiene el nodo vertice que se encuentra en una posicion especifica
+     * @param index, indice de posicion del nodo a obtener
+     * @return Nodo vertice en la posicion indicada, o null si la lista esta vacia 
+     */
     public NodoVertex<User> getDato(int index) {
         if (isEmpty()) {
             return null;
@@ -191,6 +211,11 @@ public class ListaVertex<T> {
         }
     }
 
+    /**
+     * Metodo que verifica si un usuario se encuentra almacenado algun nodo de la lista de vertices
+     * @param currentUser, usuario a buscar en la lista
+     * @return valor logico de si el usuario se encuentra en la lista
+     */
     public boolean checkUser(User currentUser) {
         boolean found = false;
         for (int i = 0; i < getSize(); i++) {
@@ -202,65 +227,50 @@ public class ListaVertex<T> {
         return found;
     }
 
-//    public ListaVertex merge(ListaVertex list1, ListaVertex list2) {
-//        NodoVertex pointer1 = list1.getHead();
-//        NodoVertex pointer2 = list2.getHead();
-//
-//        ListaVertex merged = new ListaVertex();
-//
-//        while (pointer1 != null && pointer2 != null) {
-//            if ((int) pointer1.getElement() < (int) pointer2.getElement()) {
-//                merged.insertFinal(pointer1.getElement());
-//                pointer1 = pointer1.getNext();
-//
-//            } else {
-//                merged.insertFinal(pointer2.getElement());
-//                pointer2 = pointer2.getNext();
-//
-//            }
-//        }
-//        while (pointer1 != null) {
-//            merged.insertFinal(pointer1.getElement());
-//            pointer1 = pointer1.getNext();
-//        }
-//        while (pointer2 != null) {
-//            merged.insertFinal(pointer2.getElement());
-//            pointer2 = pointer2.getNext();
-//        }
-//
-//        return merged;
-//    }
-//    public boolean contains(String name){
-//        int start = 0;
-//        NodoVertex<String> current = getHead();
-//        while(start < getSize()  && current.getNext() != null){ 
-//          if(name.equals(current.getData())){
-//              return true;
-//          }
-//          current = current.getNext();
-//        }
-//        return false;
-//    }
+    /**
+     * Metodo que obtiene la cabeza de la lista de vertices
+     * @return Primer nodo vertice de la lista de vertices
+     */
     public NodoVertex<User> getHead() {
         return head;
     }
 
+    /**
+     * Metodo que permite modificar la cabeza de la lista
+     * @param head, nodo vertice que sera la nueva cabeza de la lista
+     */
     public void setHead(NodoVertex<User> head) {
         this.head = head;
     }
 
+    /**
+     * Metodo que obtiene la cola de la lista de vertices
+     * @return Ultimo nodo vertice de la lista de vertices
+     */
     public NodoVertex<User> getTail() {
         return tail;
     }
 
+    /**
+     * Metodo que permite modificar la cola de la lista
+     * @param tail, nodo vertice que sera la nueva cola de la lista
+     */
     public void setTail(NodoVertex<User> tail) {
         this.tail = tail;
     }
 
+    /**
+     * Metodo que obtiene el tamaño de la lista de vertices
+     * @return Tamaño de la lista de vertices
+     */
     public int getSize() {
         return size;
     }
 
+    /**
+     * Metodo que permite modificar el tamaño de la lista de vertices
+     * @param size, nuevo tamaño de la lista 
+     */
     public void setSize(int size) {
         this.size = size;
     }

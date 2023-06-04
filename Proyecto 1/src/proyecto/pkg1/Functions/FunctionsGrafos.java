@@ -196,4 +196,14 @@ public class FunctionsGrafos {
             }
     } return graph;
     }
+    
+    public void drawGrafoAux (){
+        Grafo grafoAuxiliar = new Grafo();
+        grafoAuxiliar = crearGrafo(users, relaciones);
+        Graph dibujo = drawGraph(grafoAuxiliar);
+        viewGraph(dibujo);
+        
+        
+    } 
+    
 }

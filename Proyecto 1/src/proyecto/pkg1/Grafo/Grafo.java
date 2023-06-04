@@ -7,37 +7,41 @@ package proyecto.pkg1.Grafo;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Clase grafo implementada con listas de adyacencia 
  * @author alexandralecuna
  */
 public class Grafo {
 
+    //Atributos de la clase
     private ListaVertex<NodoVertex> userList;
     private int Vmax; // numero maximo de vertices
     private int V; // numero de vertices
     private int A; // numero de aristas
 
+    /**
+     * Constructor de la clase 
+     */
     public Grafo() {
         this.Vmax = 100;
         this.A = 0;
         this.userList = new ListaVertex<NodoVertex>();
     }
     
-/**
- * Funcion que agrega un usuario al grafo
- * @param currentUser, usuario a añadir
- */
+    /**
+     * Metodo que agrega un usuario como vertice al grafo 
+     * @param currentUser, usuario a añadir
+     */
     public void addVertex(User currentUser) {
         userList.insertFinal(currentUser);
         V++;
     }
 
-/**
- * Funcion que añade una relacion entre dos usuarios, cuyo peso son los años
- * @param user1, primer usuario de la relacion
- * @param user2, segundo usuario de la relacion
- * @param years, años de amistas entre el usuario 1 y 2
- */
+    /**
+     * Metodo que añade una arista entre dos vertices, cuyo peso son los años de amistad
+     * @param user1, primer usuario de la relacion
+     * @param user2, segundo usuario de la relacion
+     * @param years, años de amistas entre el usuario 1 y 2
+     */
     public void addEdge(User user1, User user2, int years) {
         NodoFriends friend1 = new NodoFriends(years, user1);
         NodoFriends friend2 = new NodoFriends(years, user2);
@@ -64,10 +68,10 @@ public class Grafo {
 
     }
 
-/**
- * Funcion que elimina usuarios del grafo
- * @param usuario, usuario a eliminar
- */
+    /**
+     * Metodo que elimina una vertice del grafo 
+     * @param usuario, usuario a eliminar
+     */
     public void deleteVertex(User usuario) {
         if (userList.checkUser(usuario)) {
 
@@ -96,6 +100,11 @@ public class Grafo {
         }
     }
 
+    /**
+     * Metodo que elimina una arista entre dos vertices del grafo
+     * @param user1, usuario 1 de la relacion a eliminar
+     * @param user2, usuario 2 de la relacion a eliminar 
+     */
     public void deleteEdge(User user1, User user2) {
         if (userList.checkUser(user1) && userList.checkUser(user2)) {
 
@@ -138,6 +147,12 @@ public class Grafo {
         }
     }
 
+    /**
+     * Metodo para determinar si existe una arista (relacion) entre dos vertices (usuarios)
+     * @param user1, usuario 1 a evaluar
+     * @param user2, usuario 2 a evaluar 
+     * @return valor logico de si la arista existe o no
+     */
     public boolean checkAdj(User user1, User user2) {
         boolean adj = false;
         for (int i = 0; i < userList.getSize(); i++) {
@@ -154,7 +169,10 @@ public class Grafo {
         }
         return adj;
     }
-
+    
+    /**
+     * Metodo que imprime todas las vertices del grafo
+     */
     public void printVerts() {
 
         String sVerts = "";
@@ -171,11 +189,17 @@ public class Grafo {
         System.out.println(sVerts);
     }
 
+    /**
+     * Metodo que imprime la lista de usuarios registrados en el grafo
+     */
     public void printUsers() {
 
         userList.printList();
     }
 
+    /**
+     * Metodo que imprime las aristas correspondientes a cada vertice del grafo
+     */
     public void printFriends() {
 
         for (int i = 0; i < userList.getSize(); i++) {
@@ -187,6 +211,11 @@ public class Grafo {
 
     }
 
+    /**
+     * Metodo que indica la posicion del usuario en la lista de usuarios 
+     * @param usuario cuya posicion se desea encontrar
+     * @return La posicion del usuario, o -1 si el usuario no se encuentra en la lista
+     */
     public int getIndex(User usuario) {
         if (!(userList.isEmpty())) {
             int index = 0;
@@ -203,6 +232,11 @@ public class Grafo {
         return -1;
     }
 
+    /**
+     * Metodo para realizar el recorrido por anchura del grafo
+     * @return La cantidad de islas en el grafo
+     * @throws Exception 
+     */
     public int BFS() throws Exception {
 
         Queue<User> cola = new Queue<>();
@@ -241,10 +275,21 @@ public class Grafo {
 
     }
     
+    /**
+     * Metodo para obtener la lista de usuarios registrados en el grafo
+     * @return La lista de usuarios registrados en el grafo
+     */
     public ListaVertex<NodoVertex> getUserList() {
         return userList;
     }
     
+    /**
+     * Metodo recursivo que permite recorrer la lista de usuarios para realizar el recorrido por profundidad del grafo
+     * @param numVertice, indice del vertice actual
+     * @param visitados, lista de booleanos de los vertices visitados
+     * @param usuariosVisitados, listaVertex que contiene los usuarios visitados
+     * @return listaVertex de los usuarios visitados 
+     */
     private ListaVertex deepTraveling(int numVertice, boolean[] visitados, ListaVertex usuariosVisitados) {
         visitados[numVertice] = true;
         usuariosVisitados.insertFinal(userList.getDato(numVertice).getElement());
@@ -257,7 +302,11 @@ public class Grafo {
         return usuariosVisitados;
     }
 
-        
+    /**
+     * Metodo para realizar el recorrido por profundidad del grafo
+     * @return Cantidad de islas en el grafo
+     * @throws Exception 
+     */
     public int DFS() throws Exception {
 
         int contIslas = 0;
@@ -279,6 +328,13 @@ public class Grafo {
 
     }
     
+    /**
+     * Funcion que indica si la relacion entre dos usuarios crea un puente en el grafo
+     * @param user1, usuario 1 a evaluar
+     * @param user2, usuario 2 a evaluar
+     * @return valor logico de si la relacion crea un puente en el grafo
+     * @throws Exception 
+     */
     public boolean checkPuente(User user1, User user2) throws Exception {
 
         boolean isPuente = false;
@@ -304,12 +360,9 @@ public class Grafo {
             deleteEdge(user1, user2);
             int cantNuevaPuentes = BFS();
             
-            System.out.println("UserA: " + user1.getUsername() + " UserB: " + user2.getUsername() + " years: "+ years);
             addEdge(user1, user2, years);
             
-            
-            System.out.println(cantPuentes + "=" + cantNuevaPuentes);
-            
+                      
             if (cantPuentes != cantNuevaPuentes) {
                 isPuente = true;
             }
