@@ -22,13 +22,13 @@ public class Main {
     public static void main(String[] args) {
        
         // Se crea el grafo a partir de la informacion guardada 
-        LeerArchivo f = new LeerArchivo();
-        FunctionsTXT use = new FunctionsTXT();
+        LeerArchivo readFile = new LeerArchivo();
+        FunctionsTXT editFile = new FunctionsTXT();
         FunctionsGrafos grafoFunctions = new FunctionsGrafos();
 
-        String infoGrafo = f.leertxt("test\\TxtProyecto.txt");
-        String[] users = use.getUsuarios(infoGrafo);
-        String[] relaciones = use.getRelaciones(infoGrafo);
+        String infoGrafo = readFile.leertxt("test\\TxtProyecto.txt");
+        String[] users = editFile.getUsuarios(infoGrafo);
+        String[] relaciones = editFile.getRelaciones(infoGrafo);
         grafo = grafoFunctions.crearGrafo(users, relaciones);
        
         // Se abre la pantalla principal 

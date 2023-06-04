@@ -180,6 +180,9 @@ public class FunctionsGrafos {
      */
     public void drawGrafoAux (){
         Grafo grafoAuxiliar = new Grafo();
+        infoGrafo = f.leertxt("test\\TxtProyecto.txt");
+        users = use.getUsuarios(infoGrafo);
+        relaciones = use.getRelaciones(infoGrafo);
         grafoAuxiliar = crearGrafo(users, relaciones);
         Graph dibujo = drawGraph(grafoAuxiliar);
         viewGraph(dibujo);
